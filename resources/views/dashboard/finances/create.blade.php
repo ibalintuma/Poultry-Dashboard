@@ -68,9 +68,8 @@
        <div class='mb-3'>
          <label for="type" class="form-label">Type</label>
          <select class="form-select" name="type" id="type" required>
-           <option value="">Select type</option>
-           <option value="income">Income</option>
            <option value="expense">Expense</option>
+           <option value="income">Income</option>
            <option value="debt">Debt</option>
            <option value="loan">Loan</option>
            <option value="capital">Capital</option>
@@ -98,10 +97,10 @@
        </div>
 
         <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">flock_id</label>
+                  <label for="exampleFormControlSelect1" class="form-label">Flock</label>
                   <select class="form-select" id="exampleFormControlSelect1"
                           aria-label="Default select" name='flock_id'>
-                          <option value="">Select flock_id</option>
+                          <option value="">Select</option>
                     @foreach($flocks as $item)
                       <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach
@@ -110,10 +109,9 @@
 
 
         <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">farm_id</label>
+                  <label for="exampleFormControlSelect1" class="form-label">Farm</label>
                   <select class="form-select" id="exampleFormControlSelect1"
                           aria-label="Default select" name='farm_id'>
-                          <option value="">Select farm_id</option>
                     @foreach($farms as $item)
                       <option value="{{$item->id}}">{{$item->name}}</option>
                     @endforeach

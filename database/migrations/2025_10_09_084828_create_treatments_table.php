@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('treatments', function (Blueprint $table) {
             $table->id();
-            //farm_id, treatment, diagnosis, medication, date, comment
             $table->foreignId('farm_id')->constrained()->onDelete('cascade');
             $table->foreignId('flock_id')->constrained()->onDelete('cascade');
             $table->text('treatment')->nullable();

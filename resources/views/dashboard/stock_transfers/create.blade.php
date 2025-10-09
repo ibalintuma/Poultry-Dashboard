@@ -109,6 +109,14 @@
                          id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
                 </div>
 
+        <div class='mb-3'>
+                  <label for="defaultFormControlInput" class="form-label">date</label>
+                  <input type="date" class="form-control"
+                         name='date'
+                         value="{{date('Y-m-d')}}"
+                         id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                </div>
+
         <div class="mb-3">
           <label for="exampleFormControlSelect1" class="form-label">direction</label>
           <select class="form-select" id="exampleFormControlSelect1"

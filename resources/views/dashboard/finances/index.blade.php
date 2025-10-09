@@ -40,7 +40,7 @@
 <!-- finances List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title">finances
+    <h5 class="card-title">Finances
 
         <a href='{{url("finances/create")}}'
                 class='add-new btn btn-primary float-end' >Add</a>
@@ -54,11 +54,10 @@
   <table class="datatables-users table border-top">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Date</th>
         <th>Type</th>
         <th>Name</th>
         <th>Amount</th>
-        <th>Date</th>
         <th>Comment</th>
         <th>Flock</th>
         <th>Farm</th>
@@ -70,7 +69,7 @@
     <tbody>
       @foreach($list as $r)
         <tr>
-          <td>{{$loop->index+1}}</td>
+          <td>{{$r->date}}</td>
           <td>
             <span class="badge
             @if($r->type == "capital") bg-info
@@ -84,7 +83,6 @@
           </td>
           <td>{{$r->name}}</td>
           <td>{{number_format($r->amount)}}</td>
-          <td>{{$r->date}}</td>
           <td>{{$r->comment}}</td>
           <td>{{$r->flock->name}}</td>
           <td>{{$r->farm->name}}</td>

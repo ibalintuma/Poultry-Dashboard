@@ -56,9 +56,8 @@
       <thead>
 
         <tr>
-          <th>ID</th>
-          <th>flock</th>
           <th>date</th>
+          <th>flock</th>
           <th>quantity</th>
           <th>reason</th>
           <th>comment</th>
@@ -69,9 +68,8 @@
       @foreach($list as $r)
 
         <tr>
-          <td>{{$r->id}}</td>
-          <td>{{$r->flock->name}}</td>
           <td>{{$r->date}}</td>
+          <td>{{$r->flock->name}}</td>
           <td>{{$r->quantity}}</td>
           <td>{{$r->reason}}</td>
           <td>{{$r->comment}}</td>

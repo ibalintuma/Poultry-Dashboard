@@ -13,7 +13,7 @@ class FinanceController extends Controller
     public function index()
     {
         return view("dashboard.finances.index",[
-                "list"=>Finance::get()->map(function($item){
+                "list"=>Finance::orderBy("date","desc")->get()->map(function($item){
                     $item->farm = \App\Models\Farm::find($item->farm_id);
                     $item->flock = \App\Models\Flock::find($item->flock_id);
                     return $item;

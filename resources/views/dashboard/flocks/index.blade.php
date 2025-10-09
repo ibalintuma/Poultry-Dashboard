@@ -40,7 +40,7 @@
 <!-- flocks List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title">Flocks
+    <h5 class="card-title">Flocks / Batch
 
         <a href='{{url("flocks/create")}}'
                 class='add-new btn btn-primary float-end' >Add</a>
@@ -54,8 +54,6 @@
     <table class="datatables-users table border-top">
       <thead>
         <tr>
-
-          <th>#</th>
           <th>Name</th>
           <th>qty now</th>
           <th>date brought</th>
@@ -70,12 +68,11 @@
       @foreach($list as $r)
 
         <tr>
-          <td>{{$loop->index + 1}}</td>
           <td>{{$r->name}}</td>
           <td>
             <div class="d-flex flex-row justify-content-center align-items-center">
             <b>{{$r->quantity_current}}</b>
-            <a href="{{url("flock_outs/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >+</a>
+            <a href="{{url("flock_outs/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >-</a>
             </div>
           </td>
           <td>{{$r->date}}</td>

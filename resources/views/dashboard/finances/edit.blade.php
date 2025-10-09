@@ -134,7 +134,7 @@
   <input type="file" class="form-control" name="picture" id="picture" accept="image/*" />
   @if($obj->picture)
     <div class="mt-2">
-      <img src="{{ asset('storage/' . $obj->picture) }}" alt="Current Picture" width="60" height="60">
+      <img src="{{ $obj->picture }}" alt="Current Picture" width="60" height="60">
     </div>
   @endif
 </div>

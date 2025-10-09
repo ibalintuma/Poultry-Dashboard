@@ -1,6 +1,6 @@
 <@extends('layouts/layoutMaster')
 
-@section('title', 'flock_outs')
+@section('title', 'treatments')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -57,54 +57,79 @@
   <!-- Offcanvas to add new user -->
   <div class="" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
     <div class="offcanvas-header border-bottom">
-      <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Add Flock Outs</h6>
+      <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Add treatments</h6>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0">
 
-      <form action='{{url("flock_outs")}}' method='post' enctype='multipart/form-data'>
+      <form action='{{url("treatments")}}' method='post' enctype='multipart/form-data'>
 
         @csrf
 
-        <div class='mb-3'>
-          <label for="defaultFormControlInput" class="form-label">flock</label>
-          <select class="form-select " @isset($flock_id) readonly  @endisset name='flock_id' aria-label="Default select example">
-            @foreach($flocks as $f)
-              <option value='{{$f->id}}'
-                      @if($flock_id == $f->id) selected @endif
-              >{{$f->name}}</option>
+        <div class="mb-3">
+          <label for="exampleFormControlSelect1" class="form-label">Flock</label>
+          <select class="form-select" id="exampleFormControlSelect1"
+                  aria-label="Default select" name='flock_id'>
+            <option value="">Select</option>
+            @foreach($flocks as $item)
+              <option value="{{$item->id}}">{{$item->name}}</option>
             @endforeach
           </select>
         </div>
-        <div class='mb-3'>
-          <label for="defaultFormControlInput" class="form-label">date</label>
-          <input type="date" class="form-control"
-                 name='date'
-                 id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+
+
+        <div class="mb-3">
+          <label for="exampleFormControlSelect1" class="form-label">Farm</label>
+          <select class="form-select" id="exampleFormControlSelect1"
+                  aria-label="Default select" name='farm_id'>
+            @foreach($farms as $item)
+              <option value="{{$item->id}}">{{$item->name}}</option>
+            @endforeach
+          </select>
         </div>
 
         <div class='mb-3'>
-          <label for="defaultFormControlInput" class="form-label">quantity</label>
+          <label for="defaultFormControlInput" class="form-label">treatment</label>
           <input type="text" class="form-control"
-                 name='quantity'
+                 name='treatment'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
         <div class='mb-3'>
-          <label for="defaultFormControlInput" class="form-label">reason</label>
+          <label for="defaultFormControlInput" class="form-label">diagnosis</label>
           <input type="text" class="form-control"
-                 name='reason'
+                 name='diagnosis'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
         <div class='mb-3'>
-          <label for="defaultFormControlInput" class="form-label">comment</label>
+          <label for="defaultFormControlInput" class="form-label">medication</label>
           <input type="text" class="form-control"
-                 name='comment'
+                 name='medication'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
-        <input type="text" value="{{url()->previous()}}" name="previous_url" class="d-none">
+        <div class='mb-3'>
+                  <label for="defaultFormControlInput" class="form-label">date</label>
+                  <input type="date" class="form-control"
+                         name='date'
+                         id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                </div>
+
+        <div class='mb-3'>
+                  <label for="defaultFormControlInput" class="form-label">comment</label>
+                  <input type="text" class="form-control"
+                         name='comment'
+                         id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                </div>
+
+        <div class='mb-3'>
+          <label for="defaultFormControlInput" class="form-label">days</label>
+          <input type="number" class="form-control"
+                 name='days'
+                 value="1"
+                 id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+        </div>
 
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
         <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>

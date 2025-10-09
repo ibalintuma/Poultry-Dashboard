@@ -13,7 +13,7 @@ class FlockOutController extends Controller
     public function index()
     {
         return view("dashboard.flock_outs.index",[
-                "list"=>FlockOut::get()->map(function($item){
+                "list"=>FlockOut::orderBy("date","desc")->get()->map(function($item){
                     $item->flock = \App\Models\Flock::find($item->flock_id);
                     return $item;
                 })

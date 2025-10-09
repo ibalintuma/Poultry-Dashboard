@@ -1,6 +1,6 @@
-@extends('layouts/layoutMaster')
+<@extends('layouts/layoutMaster')
 
-@section('title', 'farms')
+@section('title', 'treatments')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -37,12 +37,12 @@
 
 @section('content')
 
-<!-- farms List Table -->
+<!-- treatments List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title">Farms
+    <h5 class="card-title">Treatments
 
-        <a href='{{url("farms/create")}}'
+        <a href='{{url("treatments/create")}}'
                 class='add-new btn btn-primary float-end' >Add</a>
 
     </h5>
@@ -54,9 +54,14 @@
     <table class="datatables-users table border-top">
       <thead>
         <tr>
-          <th>name</th>
-          <th>Total Flock</th>
-          <th>Created By</th>
+          <th>date</th>
+          <th>Farm</th>
+          <th>Flock</th>
+          <th>treatment</th>
+          <th>diagnosis</th>
+          <th>medication</th>
+          <th>comment</th>
+          <th>days</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -64,17 +69,26 @@
       @foreach($list as $r)
 
         <tr>
-          <td>{{$r->name}}</td>
-          <td>{{number_format($r->total_flock)}}</td>
+          <td>{{$r->date}}</td>
           <td>
-            @isset($r->user)
-            {{$r->user->name}}
+            @isset($r->farm)
+            {{$r->farm->name}}
             @endisset
           </td>
           <td>
+            @isset($r->flock)
+            {{$r->flock->name}}
+            @endisset
+          </td>
+          <td>{{$r->treatment}}</td>
+          <td>{{$r->diagnosis}}</td>
+          <td>{{$r->medication}}</td>
+          <td>{{$r->comment}}</td>
+          <td>{{$r->days}}</td>
+          <td>
             <div class="row w-100">
-              @include("dashboard.components.pato_edit",[ "route" => "farms.edit","id" => $r->id])
-              @include("dashboard.components.pato_delete",[ "route" => "farms.destroy","id" => $r->id])
+              @include("dashboard.components.pato_edit",[ "route" => "treatments.edit","id" => $r->id])
+              @include("dashboard.components.pato_delete",[ "route" => "treatments.destroy","id" => $r->id])
             </div>
           </td>
 
@@ -83,7 +97,7 @@
       @endforeach
     </table>
   </div>
-  <!-- Offcanvas to add new farms -->
+  <!-- Offcanvas to add new treatments -->
 
 </div>
 @endsection

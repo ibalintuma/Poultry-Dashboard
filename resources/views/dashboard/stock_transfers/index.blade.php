@@ -55,7 +55,7 @@
       <thead>
 
         <tr>
-          <th>ID</th>
+          <th>Date</th>
           <th>Stock</th>
           <th>quantity</th>
           <th>Finance</th>
@@ -68,7 +68,7 @@
       @foreach($list as $r)
 
         <tr>
-          <td>{{$r->id}}</td>
+          <td>{{$r->date}}</td>
           <td>{{$r->stock->name}}</td>
           <td>{{$r->quantity}}</td>
           <td>

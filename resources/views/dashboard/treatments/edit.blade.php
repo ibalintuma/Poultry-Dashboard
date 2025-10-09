@@ -1,6 +1,6 @@
 <@extends('layouts/layoutMaster')
 
-@section('title', 'stock_transfers')
+@section('title', 'treatments')
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -57,56 +57,72 @@
     <!-- Offcanvas to add new user -->
     <div class="" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
       <div class="offcanvas-header border-bottom">
-        <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Edit Stock Transfers</h6>
+        <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Edit treatments</h6>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body mx-0 flex-grow-0">
 
-        <form action='{{route("stock_transfers.update", $obj->id)}}' method='post' enctype='multipart/form-data'>
+        <form action='{{route("treatments.update", $obj->id)}}' method='post' enctype='multipart/form-data'>
 
           @csrf
           @method('PUT')
 
-          <div class="mb-3">
-            <label for="exampleFormControlSelect1" class="form-label">Stock</label>
-            <select class="form-select" id="exampleFormControlSelect1"
-                    aria-label="Default select" name='stock_id'>
-              <option value="">Select</option>
-              @foreach($stocks as $item)
-                <option value="{{$item->id}}"
-                  @if( $obj->stock_id == $item->id ) selected @endif
-                >{{$item->type}} | {{$item->created_at->toDateString()}} | UGX {{ number_format($item->amount) }} = {{$item->name}}</option>
-              @endforeach
-            </select>
-          </div>
+          // treatment, diagnosis, medication, date, comment, days
 
-          <div class="mb-3">
-            <label for="exampleFormControlSelect1" class="form-label">Finance</label>
-            <select class="form-select" id="exampleFormControlSelect1"
-                    aria-label="Default select" name='finance_id'>
-              <option value="">Select</option>
-              @foreach($finances as $item)
-                <option value="{{$item->id}}"
-                        @if( $obj->finance_id == $item->id ) selected @endif
-                >{{$item->amount}}</option>
+          <div class='mb-3'>
+            <label for="flock_id" class="form-label">Flock</label>
+            <select class="form-select" name="flock_id" id="flock_id">
+              <option value="">Select Flock</option>
+              @foreach($flocks as $flock)
+                <option value="{{ $flock->id }}" {{ $obj->flock_id == $flock->id ? 'selected' : '' }}>
+                  {{ $flock->name }}
+                </option>
               @endforeach
             </select>
           </div>
 
 
           <div class='mb-3'>
-                    <label for="defaultFormControlInput" class="form-label">date</label>
-                    <input type="date" class="form-control"
-                           name='date'
-                            value='{{ $obj->date }}'
-                           id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
-                  </div>
+            <label for="farm_id" class="form-label">Farm</label>
+            <select class="form-select" name="farm_id" id="farm_id">
+              <option value="">Select Farm</option>
+              @foreach($farms as $farm)
+                <option value="{{ $farm->id }}" {{ $obj->farm_id == $farm->id ? 'selected' : '' }}>
+                  {{ $farm->name }}
+                </option>
+              @endforeach
+            </select>
+          </div>
 
           <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">quantity</label>
+            <label for="defaultFormControlInput" class="form-label">treatment</label>
             <input type="text" class="form-control"
-                   name='quantity'
-                   value='{{ $obj->quantity }}'
+                   name='treatment'
+                   value='{{ $obj->treatment }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">diagnosis</label>
+            <input type="text" class="form-control"
+                   name='diagnosis'
+                   value='{{ $obj->diagnosis }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">medication</label>
+            <input type="text" class="form-control"
+                   name='medication'
+                   value='{{ $obj->medication }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">date</label>
+            <input type="date" class="form-control"
+                   name='date'
+                   value='{{ $obj->date }}'
                    id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
           </div>
 
@@ -118,20 +134,13 @@
                    id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
           </div>
 
-          <div class="mb-3">
-                    <label for="exampleFormControlSelect1" class="form-label">direction</label>
-                    <select class="form-select" id="exampleFormControlSelect1"
-                            aria-label="Default select" name='direction'>
-                        <option value="add" {{ $obj->direction == 'add' ? 'selected' : '' }} >Add / Restock</option>
-                        <option value="subtract" {{ $obj->direction == 'subtract' ? 'selected' : '' }}>Subtract / Use</option>
-
-                    </select>
-                  </div>
-
-
-
-
-
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">days</label>
+            <input type="text" class="form-control"
+                   name='days'
+                   value='{{ $obj->days }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
 
 
 

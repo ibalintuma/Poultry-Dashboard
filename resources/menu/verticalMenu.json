@@ -4,7 +4,7 @@
 
     {
       "url": "flocks",
-      "name": "Flocks",
+      "name": "Flocks / Batch",
       "icon": "menu-icon tf-icons bx bx-calendar",
       "slug": "app-flocks"
     },
@@ -36,6 +36,11 @@
       "name": "Farms",
       "icon": "menu-icon tf-icons bx bx-calendar",
       "slug": "app-farms"
+    }, {
+      "url": "treatments",
+      "name": "Treatments",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-treatments"
     }
   ]
 }

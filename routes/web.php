@@ -198,3 +198,4 @@ Route::resource("flock_outs", App\Http\Controllers\FlockOutController::class);
 Route::resource("finances", App\Http\Controllers\FinanceController::class);
 Route::resource("stocks", App\Http\Controllers\StockController::class);
 Route::resource("stock_transfers", App\Http\Controllers\StockTransferController::class);
+Route::resource("treatments", App\Http\Controllers\TreatmentController::class);

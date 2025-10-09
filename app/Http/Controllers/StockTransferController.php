@@ -17,7 +17,7 @@ class StockTransferController extends Controller
     public function index()
     {
         return view("dashboard.stock_transfers.index",[
-        "list"=>StockTransfer::get()->map(function($item){
+        "list"=>StockTransfer::orderBy("date","desc")->get()->map(function($item){
           $item->stock = Stock::find($item->stock_id);
           $item->finance  = Finance::find($item->finance_id);
           return $item;
@@ -51,6 +51,7 @@ class StockTransferController extends Controller
                       $obj->quantity = $request->quantity;
                       $obj->finance_id = $request->finance_id;
                       $obj->comment = $request->comment;
+                      $obj->date = $request->date;
                       $obj->direction = $request->direction;
                       $obj->save();
 
@@ -90,6 +91,7 @@ class StockTransferController extends Controller
       $obj->quantity = $request->quantity;
       $obj->finance_id = $request->finance_id;
       $obj->comment = $request->comment;
+      $obj->date = $request->date;
       $obj->direction = $request->direction;
       $obj->save();
 
