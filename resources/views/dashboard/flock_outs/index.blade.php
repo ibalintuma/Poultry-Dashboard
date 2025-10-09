@@ -60,8 +60,8 @@
           <th>flock</th>
           <th>quantity</th>
           <th>reason</th>
-          <th>comment</th>
           <th>Action</th>
+          <th>comment</th>
         </tr>
       </thead>
 
@@ -72,13 +72,13 @@
           <td>{{$r->flock->name}}</td>
           <td>{{$r->quantity}}</td>
           <td>{{$r->reason}}</td>
-          <td>{{$r->comment}}</td>
           <td>
             <div class="row w-100">
               @include("dashboard.components.pato_edit",[ "route" => "flock_outs.edit","id" => $r->id])
               @include("dashboard.components.pato_delete",[ "route" => "flock_outs.destroy","id" => $r->id])
             </div>
           </td>
+          <td>{{$r->comment}}</td>
 
         </tr>
 

@@ -58,12 +58,12 @@
         <th>Type</th>
         <th>Name</th>
         <th>Amount</th>
-        <th>Comment</th>
         <th>Flock</th>
         <th>Farm</th>
         <th>Picture</th>
         <th>Status</th>
         <th>Action</th>
+        <th>Comment</th>
       </tr>
     </thead>
     <tbody>
@@ -83,7 +83,6 @@
           </td>
           <td>{{$r->name}}</td>
           <td>{{number_format($r->amount)}}</td>
-          <td>{{$r->comment}}</td>
           <td>{{$r->flock->name}}</td>
           <td>{{$r->farm->name}}</td>
           <td>
@@ -98,6 +97,7 @@
               @include("dashboard.components.pato_delete",[ "route" => "finances.destroy","id" => $r->id])
             </div>
           </td>
+          <td>{{$r->comment}}</td>
 
         </tr>
       @endforeach

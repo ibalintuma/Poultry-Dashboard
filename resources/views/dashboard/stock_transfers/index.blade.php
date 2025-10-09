@@ -59,9 +59,9 @@
           <th>Stock</th>
           <th>quantity</th>
           <th>Finance</th>
-          <th>Comment</th>
-          <th>direction</th>
+          <th>Direction</th>
           <th>Action</th>
+          <th>Comment</th>
         </tr>
       </thead>
 
@@ -76,7 +76,6 @@
             {{$r->finance->amount}}
             @endisset
           </td>
-          <td>{{$r->comment}}</td>
           <td>{{$r->direction}}</td>
 
           <td>
@@ -85,6 +84,7 @@
               @include("dashboard.components.pato_delete",[ "route" => "stock_transfers.destroy","id" => $r->id])
             </div>
           </td>
+          <td>{{$r->comment}}</td>
 
         </tr>
 
