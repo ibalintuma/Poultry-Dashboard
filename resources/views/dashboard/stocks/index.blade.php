@@ -56,10 +56,10 @@
         <tr>
           <th>Name</th>
           <th>Quantity</th>
-          <th>Comment</th>
           <th>Farm</th>
           <th>Picture</th>
           <th>Action</th>
+          <th>Comment</th>
         </tr>
       </thead>
 
@@ -78,7 +78,6 @@
             </div>
           </td>
 
-          <td>{{$r->comment}}</td>
           <td>{{$r->farm->name}}</td>
           <td>
             @if($r->picture)
@@ -93,6 +92,7 @@
               @include("dashboard.components.pato_delete",[ "route" => "stocks.destroy","id" => $r->id])
             </div>
           </td>
+          <td>{{$r->comment}}</td>
         </tr>
 
       @endforeach
