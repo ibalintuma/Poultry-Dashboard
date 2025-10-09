@@ -77,7 +77,7 @@
           </td>
           <td>
             {{$r->date}}
-            <span class="text-muted">({{ \Carbon\Carbon::parse($r->date)->diffInDays() }} days ago)</span>
+            <span class="text-muted">({{ \Carbon\Carbon::parse($r->date)->diffInDays()|round(0, PHP_ROUND_HALF_DOWN) }} days ago)</span>
           </td>
           <td>{{$r->farm->name}}</td>
           <td>{{$r->type}}</td>
