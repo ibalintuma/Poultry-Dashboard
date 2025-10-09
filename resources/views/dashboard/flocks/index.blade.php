@@ -75,7 +75,10 @@
             <a href="{{url("flock_outs/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >-</a>
             </div>
           </td>
-          <td>{{$r->date}}</td>
+          <td>
+            {{$r->date}}
+            <span class="text-muted">({{ \Carbon\Carbon::parse($r->date)->diffInDays() }} days ago)</span>
+          </td>
           <td>{{$r->farm->name}}</td>
           <td>{{$r->type}}</td>
           <td>
