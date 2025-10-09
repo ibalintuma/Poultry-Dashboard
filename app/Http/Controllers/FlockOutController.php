@@ -59,7 +59,8 @@ class FlockOutController extends Controller
      */
     public function edit(FlockOut $flockOut)
     {
-        return view("dashboard.flock_outs.edit", ["obj" => $flockOut]);
+      $flocks = \App\Models\Flock::all();
+        return view("dashboard.flock_outs.edit", ["obj" => $flockOut,  "flocks"=>$flocks]);
     }
 
     /**
