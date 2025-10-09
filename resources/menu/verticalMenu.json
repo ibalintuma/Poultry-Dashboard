@@ -39,7 +39,7 @@
     {
       "url": "farms",
       "name": "Farms",
-      "icon": "menu-icon tf-icons bx bx-leaf",
+      "icon": "menu-icon tf-icons bx bx-barn",
       "slug": "app-farms"
     }
   ]
