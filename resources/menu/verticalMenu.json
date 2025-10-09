@@ -1,0 +1,41 @@
+{
+  "menu": [
+
+
+    {
+      "url": "flocks",
+      "name": "Flocks",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-flocks"
+    },
+    {
+      "url": "flock_outs",
+      "name": "Flock Out",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-flock_outs"
+    },
+    {
+      "url": "finances",
+      "name": "Finances",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-flock_outs"
+    },
+    {
+      "url": "stocks",
+      "name": "Stock",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-stocks"
+    },
+    {
+      "url": "stock_transfers",
+      "name": "Stock Transfers",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-stock_transfers"
+    }, {
+      "url": "farms",
+      "name": "Farms",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-farms"
+    }
+  ]
+}
