@@ -1,45 +1,45 @@
 {
   "menu": [
-
-
     {
       "url": "flocks",
       "name": "Flocks / Batch",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-layer",
       "slug": "app-flocks"
     },
     {
       "url": "flock_outs",
       "name": "Flock Out",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-exit",
       "slug": "app-flock_outs"
     },
     {
       "url": "finances",
       "name": "Finances",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-wallet",
       "slug": "app-flock_outs"
     },
     {
       "url": "stocks",
       "name": "Stock",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-cube",
       "slug": "app-stocks"
     },
     {
       "url": "stock_transfers",
       "name": "Stock Transfers",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-transfer-alt",
       "slug": "app-stock_transfers"
-    }, {
+    },
+    {
       "url": "treatments",
       "name": "Treatments",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-plus-medical",
       "slug": "app-treatments"
-    }, {
+    },
+    {
       "url": "farms",
       "name": "Farms",
-      "icon": "menu-icon tf-icons bx bx-calendar",
+      "icon": "menu-icon tf-icons bx bx-leaf",
       "slug": "app-farms"
     }
   ]
