@@ -75,7 +75,7 @@
               @foreach($stocks as $item)
                 <option value="{{$item->id}}"
                   @if( $obj->stock_id == $item->id ) selected @endif
-                >{{$item->type}} | {{$item->created_at->toDateString()}} | UGX {{ number_format($item->amount) }} = {{$item->name}}</option>
+                >{{$item->type}}</option>
               @endforeach
             </select>
           </div>
@@ -88,7 +88,7 @@
               @foreach($finances as $item)
                 <option value="{{$item->id}}"
                         @if( $obj->finance_id == $item->id ) selected @endif
-                >{{$item->amount}}</option>
+                >{{$item->type}} | {{$item->created_at->toDateString()}} | UGX {{ number_format($item->amount) }} = {{$item->name}}</option>
               @endforeach
             </select>
           </div>
