@@ -77,7 +77,7 @@
             @foreach($stocks as $item)
               <option value="{{$item->id}}"
                       @if($stock_id == $item->id) selected @endif
-              >{{$item->name}}</option>
+              >{{$item->name}} ({{$item->units}})</option>
             @endforeach
           </select>
         </div>
