@@ -32,15 +32,15 @@
       "icon": "menu-icon tf-icons bx bx-calendar",
       "slug": "app-stock_transfers"
     }, {
-      "url": "farms",
-      "name": "Farms",
-      "icon": "menu-icon tf-icons bx bx-calendar",
-      "slug": "app-farms"
-    }, {
       "url": "treatments",
       "name": "Treatments",
       "icon": "menu-icon tf-icons bx bx-calendar",
       "slug": "app-treatments"
+    }, {
+      "url": "farms",
+      "name": "Farms",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-farms"
     }
   ]
 }

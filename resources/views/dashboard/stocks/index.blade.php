@@ -54,7 +54,6 @@
     <table class="datatables-users table border-top">
       <thead>
         <tr>
-          <th>#</th>
           <th>Name</th>
           <th>Quantity</th>
           <th>Units</th>
@@ -68,7 +67,6 @@
       @foreach($list as $r)
 
         <tr>
-          <td>{{$loop->index + 1}}</td>
           <td>
             {{$r->name}}
           </td>
