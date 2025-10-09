@@ -71,8 +71,10 @@
           <td>{{$r->name}}</td>
           <td>
             <div class="d-flex flex-row justify-content-center align-items-center">
-            <b>{{$r->quantity_current}}</b>
-            <a href="{{url("flock_outs/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >-</a>
+              <span class="m-1">
+                <b>{{$r->quantity_current}}</b>
+              </span>
+              <a href="{{url("flock_outs/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >-</a>
             </div>
           </td>
           <td>
