@@ -75,7 +75,7 @@
               @foreach($stocks as $item)
                 <option value="{{$item->id}}"
                   @if( $obj->stock_id == $item->id ) selected @endif
-                >{{$item->type}}</option>
+                >{{$item->name}}</option>
               @endforeach
             </select>
           </div>
