@@ -121,6 +121,27 @@
                    id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
           </div>
 
+
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">seller</label>
+            <input type="text" class="form-control"
+                   name='seller'
+                    value='{{ $obj->seller }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">status</label>
+            <select name='status' class='form-control'>
+              @foreach($statuses as $s)
+                <option value='{{$s}}'
+                  @if($s == $obj->status) selected @endif
+                >{{$s}}</option>
+              @endforeach
+            </select>
+          </div>
+
+
           <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
           <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>
 

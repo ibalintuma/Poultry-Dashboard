@@ -31,7 +31,8 @@ class FlockController extends Controller
     public function create()
     {
       $farms = \App\Models\Farm::all();
-        return view("dashboard.flocks.create",["farms"=>$farms]);
+      $statuses = ['pending', 'deposited', 'paid', 'received', 'ongoing', 'sold'];
+        return view("dashboard.flocks.create",["farms"=>$farms, "statuses"=>$statuses]);
     }
 
     /**
@@ -45,6 +46,8 @@ class FlockController extends Controller
                       $obj->farm_id = $request->farm_id;
                       $obj->type = $request->type;
                       $obj->date = $request->date;
+                      $obj->seller = $request->seller;
+                      $obj->status = $request->status;
 
                       if ($files = $request->file('picture')){
                           $fName = time().'.'.$request->picture->extension();
@@ -71,7 +74,8 @@ class FlockController extends Controller
     public function edit(Flock $flock)
     {
         $farms = \App\Models\Farm::all();
-        return view("dashboard.flocks.edit", ["obj" => $flock, "farms"=>$farms]);
+      $statuses = ['pending', 'deposited', 'paid', 'received', 'ongoing', 'sold'];
+        return view("dashboard.flocks.edit", ["obj" => $flock, "farms"=>$farms, "statuses"=>$statuses]);
     }
 
     /**
@@ -85,6 +89,8 @@ class FlockController extends Controller
           $obj->farm_id = $request->farm_id;
           $obj->type = $request->type;
       $obj->date = $request->date;
+      $obj->seller = $request->seller;
+      $obj->status = $request->status;
 
           if ($files = $request->file('picture')){
               $fName = time().'.'.$request->picture->extension();

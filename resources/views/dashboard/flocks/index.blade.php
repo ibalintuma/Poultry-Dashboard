@@ -62,13 +62,19 @@
           <th>Action</th>
           <th>qty Initial</th>
           <th>qty Lost</th>
+          <th>seller</th>
+          <th>status</th>
         </tr>
       </thead>
 
       @foreach($list as $r)
 
         <tr>
-          <td>{{$r->name}}</td>
+          <td>
+            <span class="text-nowrap" >
+            {{$r->name}}
+            </span>
+          </td>
           <td>
             <div class="d-flex flex-row justify-content-center align-items-center">
               <span class="m-1">
@@ -78,10 +84,18 @@
             </div>
           </td>
           <td>
-            {{$r->date}}
-            <span class="text-muted">({{ \Carbon\Carbon::parse($r->date)->diffInDays()|round(0, PHP_ROUND_HALF_DOWN) }} days ago)</span>
+            <span class="text-nowrap" >
+            {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
+              @if( $r->status == "ongoing")
+                <span class="text-muted">({{ \Carbon\Carbon::parse($r->date)->diffInDays()|round(0, PHP_ROUND_HALF_DOWN) }} days ago)</span>
+              @endif
+            </span>
           </td>
-          <td>{{$r->farm->name}}</td>
+          <td>
+            <span class="text-nowrap" >
+            {{$r->farm->name}}
+            </span>
+          </td>
           <td>{{$r->type}}</td>
           <td>
             <div class="row w-100">
@@ -96,6 +110,12 @@
               {{$r->quantity_out}}
               </a>
             </div>
+          </td>
+          <td>{{$r->seller}}</td>
+          <td>
+            <span class="badge bg-dark text-white">
+              {{$r->status}}
+            </span>
           </td>
 
         </tr>
