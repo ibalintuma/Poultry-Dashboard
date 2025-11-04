@@ -61,15 +61,19 @@
         <th>Flock</th>
         <th>Farm</th>
         <th>Picture</th>
-        <th>Status</th>
         <th>Action</th>
         <th>Comment</th>
+        <th>Created At</th>
       </tr>
     </thead>
     <tbody>
       @foreach($list as $r)
         <tr>
-          <td>{{$r->date}}</td>
+          <td>
+            <span class="text-nowrap" >
+              {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
+            </span>
+          </td>
           <td>
             <span class="badge
             @if($r->type == "capital") bg-info
@@ -82,22 +86,44 @@
              text-white">{{$r->type}}</span>
           </td>
           <td>{{$r->name}}</td>
-          <td>{{number_format($r->amount)}}</td>
-          <td>{{$r->flock->name}}</td>
-          <td>{{$r->farm->name}}</td>
+          <td>
+            <b>{{number_format($r->amount)}}</b>
+          </td>
+          <td>
+            <span class="text-nowrap" >
+            @isset($r->flock)
+            {{$r->flock->name}}
+            @endisset
+            </span>
+          </td>
+          <td>
+            <span class="text-nowrap" >
+            @isset($r->farm)
+            {{$r->farm->name}}
+            @endisset
+            </span>
+          </td>
           <td>
             @if($r->picture)
               <a href="{{ $r->picture }}" target="_blank">Open</a>
             @endif
           </td>
-          <td>{{$r->status}}</td>
           <td>
             <div class="row w-100">
               @include("dashboard.components.pato_edit",[ "route" => "finances.edit","id" => $r->id])
               @include("dashboard.components.pato_delete",[ "route" => "finances.destroy","id" => $r->id])
             </div>
           </td>
-          <td>{{$r->comment}}</td>
+          <td>
+            <span class="text-nowrap" >
+            {{$r->comment}}
+            </span>
+          </td>
+          <td>
+            <span class="text-nowrap" >
+              {{ \Carbon\Carbon::parse($r->created_at)->format('M j, Y h:i A') }}
+            </span>
+          </td>
 
         </tr>
       @endforeach

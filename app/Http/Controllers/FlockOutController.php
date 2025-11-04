@@ -10,13 +10,21 @@ class FlockOutController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+      $flock_id = $request->input("flock_id");
+
+      $builder = FlockOut::query();
+      if($flock_id){
+          $builder->where("flock_id",$flock_id);
+      }
+
         return view("dashboard.flock_outs.index",[
-                "list"=>FlockOut::orderBy("date","desc")->get()->map(function($item){
+                "list"=>$builder->orderBy("date","desc")->get()->map(function($item){
                     $item->flock = \App\Models\Flock::find($item->flock_id);
                     return $item;
-                })
+                }),
+                "flock_id"=>$flock_id
               ]);
     }
 

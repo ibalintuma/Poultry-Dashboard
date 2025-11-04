@@ -2,7 +2,7 @@
   "menu": [
     {
       "url": "flocks",
-      "name": "Flocks / Batch",
+      "name": "Flocks",
       "icon": "menu-icon tf-icons bx bx-layer",
       "slug": "app-flocks"
     },

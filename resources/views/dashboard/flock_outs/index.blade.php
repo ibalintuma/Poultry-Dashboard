@@ -42,7 +42,7 @@
   <div class="card-header border-bottom">
     <h5 class="card-title">Flock Out
 
-        <a href='{{url("flock_outs/create")}}'
+        <a href='{{url("flock_outs/create?flock_id=".$flock_id)}}'
                 class='add-new btn btn-primary float-end' >Add</a>
 
     </h5>
@@ -68,7 +68,9 @@
       @foreach($list as $r)
 
         <tr>
-          <td>{{$r->date}}</td>
+          <td>
+            {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
+          </td>
           <td>{{$r->flock->name}}</td>
           <td>{{$r->quantity}}</td>
           <td>{{$r->reason}}</td>

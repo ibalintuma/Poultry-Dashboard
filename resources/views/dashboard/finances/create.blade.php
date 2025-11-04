@@ -65,7 +65,34 @@
       <form action='{{url("finances")}}' method='post' enctype='multipart/form-data'>
 
         @csrf
-       <div class='mb-3'>
+
+        <div class="row">
+
+
+
+          <div class="mb-3 col-6">
+            <label for="exampleFormControlSelect1" class="form-label">Farm</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='farm_id'>
+              @foreach($farms as $item)
+                <option value="{{$item->id}}">{{$item->name}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="mb-3 col-6">
+            <label for="exampleFormControlSelect1" class="form-label">Flock</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='flock_id'>
+              @foreach($flocks as $item)
+                <option value="{{$item->id}}">{{$item->name}}  (qty: {{$item->quantity}})</option>
+              @endforeach
+              <option value="">Select</option>
+            </select>
+          </div>
+
+
+
+          <div class='mb-3 col-6'>
          <label for="type" class="form-label">Type</label>
          <select class="form-select" name="type" id="type" required>
            <option value="expense">Expense</option>
@@ -76,60 +103,41 @@
          </select>
        </div>
 
-       <div class='mb-3'>
+
+          <div class='mb-3 col-6'>
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" name="date" id="date" required />
+          </div>
+
+       <div class='mb-3 col-6'>
          <label for="name" class="form-label">Name</label>
          <input type="text" class="form-control" name="name" id="name" required />
        </div>
 
-       <div class='mb-3'>
+       <div class='mb-3 col-6'>
          <label for="amount" class="form-label">Amount</label>
          <input type="number" class="form-control" name="amount" id="amount" step="0.01" required />
        </div>
 
-       <div class='mb-3'>
-         <label for="date" class="form-label">Date</label>
-         <input type="date" class="form-control" name="date" id="date" required />
-       </div>
 
        <div class='mb-3'>
          <label for="comment" class="form-label">Comment</label>
          <textarea class="form-control" name="comment" id="comment"></textarea>
        </div>
 
-        <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Flock</label>
-                  <select class="form-select" id="exampleFormControlSelect1"
-                          aria-label="Default select" name='flock_id'>
-                          <option value="">Select</option>
-                    @foreach($flocks as $item)
-                      <option value="{{$item->id}}">{{$item->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-
-
-        <div class="mb-3">
-                  <label for="exampleFormControlSelect1" class="form-label">Farm</label>
-                  <select class="form-select" id="exampleFormControlSelect1"
-                          aria-label="Default select" name='farm_id'>
-                    @foreach($farms as $item)
-                      <option value="{{$item->id}}">{{$item->name}}</option>
-                    @endforeach
-                  </select>
-                </div>
-
-       <div class='mb-3'>
+       <div class='mb-3 col-6'>
          <label for="picture" class="form-label">Picture</label>
          <input type="file" class="form-control" name="picture" id="picture" accept="image/*" />
        </div>
 
-       <div class='mb-3'>
+       <div class='mb-3 col-6'>
          <label for="status" class="form-label">Status</label>
          <select class="form-select" name="status" id="status" required>
            <option value="pending">Pending</option>
            <option value="completed">Completed</option>
          </select>
        </div>
+        </div>
 
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
         <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>

@@ -40,7 +40,7 @@
 <!-- flocks List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title">Flocks / Batch
+    <h5 class="card-title">Flocks
 
         <a href='{{url("flocks/create")}}'
                 class='add-new btn btn-primary float-end' >Add</a>
@@ -92,7 +92,9 @@
           <td>{{$r->quantity}}</td>
           <td>
             <div class="d-flex flex-row justify-content-center align-items-center">
+              <a href="{{url("flock_outs?flock_id=".$r->id)}}">
               {{$r->quantity_out}}
+              </a>
             </div>
           </td>
 
