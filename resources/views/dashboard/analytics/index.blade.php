@@ -707,41 +707,9 @@
   // Generate chicken loss data per flock/batch (DYNAMIC BATCHES)
   function generateChickenLossData() {
     // Chicken loss data from Laravel backend
-    
 
-    const chicken_loss_data = [
-      {"date":"2025-10-12","batches":{"Batch A":0,"Batch B":0,"Batch C":0},"total_loss":0},
-      {"date":"2025-10-13","batches":{"Batch A":2,"Batch B":1,"Batch C":0},"total_loss":3},
-      {"date":"2025-10-14","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
-      {"date":"2025-10-15","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
-      {"date":"2025-10-16","batches":{"Batch A":3,"Batch B":1,"Batch C":2},"total_loss":6},
-      {"date":"2025-10-17","batches":{"Batch A":1,"Batch B":0,"Batch C":0},"total_loss":1},
-      {"date":"2025-10-18","batches":{"Batch A":0,"Batch B":1,"Batch C":1},"total_loss":2},
-      {"date":"2025-10-19","batches":{"Batch A":2,"Batch B":0,"Batch C":0},"total_loss":2},
-      {"date":"2025-10-20","batches":{"Batch A":1,"Batch B":1,"Batch C":1},"total_loss":3},
-      {"date":"2025-10-21","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
-      {"date":"2025-10-22","batches":{"Batch A":2,"Batch B":0,"Batch C":2},"total_loss":4},
-      {"date":"2025-10-23","batches":{"Batch A":0,"Batch B":1,"Batch C":0},"total_loss":1},
-      {"date":"2025-10-24","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
-      {"date":"2025-10-25","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
-      {"date":"2025-10-26","batches":{"Batch A":3,"Batch B":1,"Batch C":2},"total_loss":6},
-      {"date":"2025-10-27","batches":{"Batch A":1,"Batch B":0,"Batch C":0},"total_loss":1},
-      {"date":"2025-10-28","batches":{"Batch A":0,"Batch B":1,"Batch C":1},"total_loss":2},
-      {"date":"2025-10-29","batches":{"Batch A":2,"Batch B":2,"Batch C":0},"total_loss":4},
-      {"date":"2025-10-30","batches":{"Batch A":0,"Batch B":0,"Batch C":1},"total_loss":1},
-      {"date":"2025-10-31","batches":{"Batch A":1,"Batch B":1,"Batch C":0},"total_loss":2},
-      {"date":"2025-11-01","batches":{"Batch A":0,"Batch B":0,"Batch C":2},"total_loss":2},
-      {"date":"2025-11-02","batches":{"Batch A":2,"Batch B":1,"Batch C":0},"total_loss":3},
-      {"date":"2025-11-03","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
-      {"date":"2025-11-04","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
-      {"date":"2025-11-05","batches":{"Batch A":3,"Batch B":0,"Batch C":2},"total_loss":5},
-      {"date":"2025-11-06","batches":{"Batch A":0,"Batch B":1,"Batch C":0},"total_loss":1},
-      {"date":"2025-11-07","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
-      {"date":"2025-11-08","batches":{"Batch A":2,"Batch B":2,"Batch C":0},"total_loss":4},
-      {"date":"2025-11-09","batches":{"Batch A":0,"Batch B":1,"Batch C":1},"total_loss":2},
-      {"date":"2025-11-10","batches":{"Batch A":1,"Batch B":0,"Batch C":0},"total_loss":1},
-      {"date":"2025-11-11","batches":{"Batch A":0,"Batch B":0,"Batch C":0},"total_loss":0}
-    ];
+
+    const chicken_loss_data = @json($chicken_loss_data);
 
     const dates = chicken_loss_data.map(entry => entry.date);
     const totalLoss = chicken_loss_data.map(entry => entry.total_loss);
@@ -783,7 +751,7 @@
     };
   }
 
-  const data = generateChickenLossData();
+  const dataChickenLoss = generateChickenLossData();
 
   // Define colors for batches (will cycle through if more batches than colors)
   const batchColors = [
@@ -803,10 +771,10 @@
   const series = [];
   const colors = [];
 
-  data.batchNames.forEach((batchName, index) => {
+  dataChickenLoss.batchNames.forEach((batchName, index) => {
     series.push({
-      name: `${batchName} - Daily Loss`,
-      data: data.batchData[batchName],
+      name: `${batchName}`,
+      data: dataChickenLoss.batchData[batchName],
       type: 'line'
     });
     colors.push(batchColors[index % batchColors.length]);
@@ -815,26 +783,26 @@
   // Add total line (thicker, red)
   series.push({
     name: 'Total Daily Loss',
-    data: data.totalLoss,
+    data: dataChickenLoss.totalLoss,
     type: 'line'
   });
   colors.push('#ef4444');
 
   // Calculate totals for summary
   const batchTotals = {};
-  data.batchNames.forEach(batchName => {
-    batchTotals[batchName] = data.cumulativeBatchData[batchName][data.cumulativeBatchData[batchName].length - 1];
+  dataChickenLoss.batchNames.forEach(batchName => {
+    batchTotals[batchName] = dataChickenLoss.cumulativeBatchData[batchName][dataChickenLoss.cumulativeBatchData[batchName].length - 1];
   });
-  const grandTotalLoss = data.cumulativeTotal[data.cumulativeTotal.length - 1];
+  const grandTotalLoss = dataChickenLoss.cumulativeTotal[dataChickenLoss.cumulativeTotal.length - 1];
 
   // Build stroke widths dynamically (all batches get 2, total gets 4)
-  const strokeWidths = data.batchNames.map(() => 2).concat([4]);
+  const strokeWidths = dataChickenLoss.batchNames.map(() => 2).concat([4]);
 
   // Chart configuration
   var options = {
     series: series,
     chart: {
-      height: 450,
+      height: 400,
       type: 'line',
       animations: {
         enabled: true,
@@ -869,7 +837,7 @@
       dashArray: 0
     },
     title: {
-      text: 'Chicken Loss Rate - Last 30 Days',
+      text: 'Chicken Loss Rate - Last 15 Days',
       align: 'left',
       style: {
         fontSize: '20px',
@@ -878,7 +846,7 @@
       }
     },
     subtitle: {
-      text: `Daily chicken loss per batch/flock (${data.batchNames.length} batches) | User: ibalintuma | Generated: 2025-11-11 02:25:42 UTC`,
+      text: `Daily chicken loss per batch/flock (${dataChickenLoss.batchNames.length} batches)`,
       align: 'left',
       style: {
         fontSize: '14px',
@@ -913,14 +881,6 @@
     },
     xaxis: {
       categories: data.dates,
-      title: {
-        text: 'Date',
-        style: {
-          fontSize: '13px',
-          fontWeight: 600,
-          color: '#64748b'
-        }
-      },
       labels: {
         rotate: -45,
         rotateAlways: false,
@@ -958,7 +918,7 @@
           colors: '#64748b'
         },
         formatter: function(value) {
-          return Math.round(value) + ' chickens';
+          return Math.round(value) + ' chicks';
         }
       },
       min: 0
@@ -983,17 +943,7 @@
       },
       y: {
         formatter: function(value, { seriesIndex, dataPointIndex }) {
-          // Get cumulative value for this series
-          let cumulative;
-          if (seriesIndex < data.batchNames.length) {
-            // It's a batch
-            const batchName = data.batchNames[seriesIndex];
-            cumulative = data.cumulativeBatchData[batchName][dataPointIndex];
-          } else {
-            // It's the total
-            cumulative = data.cumulativeTotal[dataPointIndex];
-          }
-          return value + ' chickens (Total: ' + cumulative + ')';
+          return value + ' chickens';
         }
       },
       marker: {
@@ -1065,28 +1015,12 @@
 
   // Build console summary dynamically
   let batchSummary = '';
-  data.batchNames.forEach(batchName => {
+  dataChickenLoss.batchNames.forEach(batchName => {
     const total = batchTotals[batchName];
     const padding = ' '.repeat(Math.max(0, 17 - batchName.length));
     batchSummary += `║ ${batchName}${padding}  ${total} chickens                            ║\n`;
   });
 
-  // Log summary to console
-  console.log(`
-╔════════════════════════════════════════════════════════════╗
-║      🐔 Chicken Loss Analytics - ibalintuma                ║
-║                 Last 30 Days Summary                       ║
-╠════════════════════════════════════════════════════════════╣
-║ Period: Oct 12 - Nov 11, 2025                             ║
-║ Generated: 2025-11-11 02:25:42 UTC                        ║
-║ Total Batches: ${data.batchNames.length}                                           ║
-╠════════════════════════════════════════════════════════════╣
-${batchSummary}╠════════════════════════════════════════════════════════════╣
-║ GRAND TOTAL LOSS:    ${grandTotalLoss} chickens                          ║
-║ Average Daily Loss:  ${(grandTotalLoss / 30).toFixed(2)} chickens/day                   ║
-║ Average per Batch:   ${(grandTotalLoss / data.batchNames.length).toFixed(2)} chickens                       ║
-╚════════════════════════════════════════════════════════════╝
-  `);
 </script>
 
 @endsection

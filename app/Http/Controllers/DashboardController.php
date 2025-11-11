@@ -34,6 +34,26 @@ class DashboardController extends Controller
         ];
       }
 
+      $chicken_loss_data = [];
+      for($i=15; $i>=0; $i--){
+        $date = now()->subDays($i)->format("Y-m-d");
+        $batches = [];
+        $total_loss = 0;
+        $flocks = \App\Models\Flock::whereIn("status",["ongoing"])->get();
+        foreach($flocks as $flock){
+          $loss_count = \App\Models\FlockOut::where("flock_id",$flock->id)
+            ->whereDate("date",$date)
+            ->sum("quantity");
+          $batches[$flock->name] = $loss_count;
+          $total_loss += $loss_count;
+        }
+        $chicken_loss_data[] = [
+          "date"=>$date,
+          "batches"=>$batches,
+          "total_loss"=>$total_loss
+        ];
+      }
+
 
         return view('dashboard.analytics.index',[
           "expenses_total" => \App\Models\Finance::where("type","expense")->sum('amount'),
@@ -52,6 +72,8 @@ class DashboardController extends Controller
           "chicken_out_died_total" => \App\Models\FlockOut::where("type","died")->sum('quantity'),
           "chicken_out_gift_total" => \App\Models\FlockOut::where("type","gift")->sum('quantity'),
           "chicken_out_got_out_total" => \App\Models\FlockOut::where("type","got-out")->sum('quantity'),
+
+          "chicken_loss_data"=>$chicken_loss_data
         ]);
     }
 }
