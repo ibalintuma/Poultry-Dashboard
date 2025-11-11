@@ -75,7 +75,7 @@
     <option value="expense" {{ $obj->type == 'expense' ? 'selected' : '' }}>Expense</option>
     <option value="debt" {{ $obj->type == 'debt' ? 'selected' : '' }}>Debt</option>
     <option value="loan" {{ $obj->type == 'loan' ? 'selected' : '' }}>Loan</option>
-    <option value="capital" {{ $obj->type == 'capital' ? 'selected' : '' }}>Loan</option>
+    <option value="capital" {{ $obj->type == 'capital' ? 'selected' : '' }}>Capital</option>
   </select>
 </div>
 
@@ -144,8 +144,9 @@
   <label for="status" class="form-label">Status</label>
   <select class="form-select" name="status" id="status" required>
     <option value="">Select status</option>
-    <option value="pending" {{ $obj->status == 'pending' ? 'selected' : '' }}>Pending</option>
     <option value="completed" {{ $obj->status == 'completed' ? 'selected' : '' }}>Completed</option>
+    <option value="cleared" {{ $obj->status == 'cleared' ? 'selected' : '' }}>Cleared</option>
+    <option value="pending" {{ $obj->status == 'pending' ? 'selected' : '' }}>Pending</option>
   </select>
 </div>
 

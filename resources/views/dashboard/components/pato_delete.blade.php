@@ -1,4 +1,4 @@
-<div class="col-6 pt-3">
+<div class="col-6">
   <form action="{{ route($route, $id) }}" method="POST">
     @method('DELETE')
     @csrf

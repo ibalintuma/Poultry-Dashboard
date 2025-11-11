@@ -21,10 +21,10 @@ Route::group(['middleware' => 'auth'], function() {
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
-Route::get('/', [\App\Http\Controllers\FlockController::class,"index"])->name('dashboard-analytics');
-Route::get('/home',[\App\Http\Controllers\FlockController::class,"index"])->name('dashboard-analytics');
-Route::get('/dashboard/analytics',[\App\Http\Controllers\FlockController::class,"index"])->name('dashboard-analytics');
-Route::get('/dashboard/ecommerce',[\App\Http\Controllers\FlockController::class,"index"])->name('dashboard-ecommerce');
+Route::get('/', [\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-analytics');
+Route::get('/home',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-analytics');
+Route::get('/dashboard/analytics',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-analytics');
+Route::get('/dashboard/ecommerce',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-ecommerce');
 
 // locale
 Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');

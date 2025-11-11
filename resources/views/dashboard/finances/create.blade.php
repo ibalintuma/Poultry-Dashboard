@@ -133,8 +133,9 @@
        <div class='mb-3 col-6'>
          <label for="status" class="form-label">Status</label>
          <select class="form-select" name="status" id="status" required>
-           <option value="pending">Pending</option>
            <option value="completed">Completed</option>
+           <option value="cleared">Cleared</option>
+           <option value="pending">Pending</option>
          </select>
        </div>
         </div>

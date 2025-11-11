@@ -16,7 +16,7 @@ class FlockController extends Controller
     public function index()
     {
         return view("dashboard.flocks.index",[
-            "list"=>Flock::get()->map(function($item){
+            "list"=>Flock::orderBy("name","asc")->get()->map(function($item){
                 $item->farm = Farm::find($item->farm_id);
                 $item->quantity_out = \App\Models\FlockOut::where("flock_id",$item->id)->sum("quantity");
                 $item->quantity_current = $item->quantity - $item->quantity_out;

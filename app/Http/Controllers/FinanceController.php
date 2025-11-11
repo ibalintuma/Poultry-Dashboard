@@ -88,6 +88,7 @@ class FinanceController extends Controller
           $obj->comment = $request->comment;
           $obj->flock_id = $request->flock_id;
           $obj->farm_id = $request->farm_id;
+          $obj->status = $request->status;
 
           if ($files = $request->file('picture')){
               $fName = time().'.'.$request->picture->extension();

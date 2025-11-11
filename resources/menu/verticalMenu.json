@@ -1,6 +1,11 @@
 {
   "menu": [
     {
+      "url": "",
+      "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bx-layer",
+      "slug": "app-dashboard"
+    },{
       "url": "flocks",
       "name": "Flocks",
       "icon": "menu-icon tf-icons bx bx-layer",

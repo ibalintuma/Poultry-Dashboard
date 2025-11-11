@@ -82,8 +82,10 @@
             @elseif($r->type == "debt") bg-warning
             @elseif($r->type == "loan") bg-secondary
             @endif
-
              text-white">{{$r->type}}</span>
+            @if($r->type == "debt")
+             <span class="small">{{$r->status}}</span>
+            @endif
           </td>
           <td>{{$r->name}}</td>
           <td>
