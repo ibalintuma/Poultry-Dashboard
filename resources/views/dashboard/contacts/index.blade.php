@@ -62,6 +62,9 @@
           <th>comment</th>
           <th>address</th>
           <th>status</th>
+          <th>email</th>
+          <th>email Notification</th>
+          <th>SMS Notification</th>
           <th>Action</th>
           <th>Action</th>
         </tr>
@@ -78,6 +81,9 @@
           <td>{{$r->comment}}</td>
           <td>{{$r->address}}</td>
           <td>{{$r->status}}</td>
+          <td>{{$r->email}}</td>
+          <td>{{$r->enable_email_notifications == 1 ? "Yes" : "No" }}</td>
+          <td>{{$r->enable_sms_notifications == 1 ? "Yes" : "No" }}</td>
           <td>
             <div class="d-inline-block text-nowrap">
               <a href='{{url("contacts/".$r->id."/edit")}}'>

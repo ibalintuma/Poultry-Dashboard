@@ -39,6 +39,10 @@ class ContactController extends Controller
                 $obj->comment = $request->comment;
                 $obj->address = $request->address;
                 $obj->status = $request->status;
+      //email, enable_sms_notifications, enable_email_notifications
+      $obj->email = $request->email;
+      $obj->enable_sms_notifications = $request->enable_sms_notifications ? true : false;
+      $obj->enable_email_notifications = $request->enable_email_notifications ? true : false;
                 $obj->save();
 
                 return redirect()->route('contacts.index');
@@ -73,6 +77,11 @@ class ContactController extends Controller
                 $obj->comment = $request->comment;
                 $obj->address = $request->address;
                 $obj->status = $request->status;
+
+      $obj->email = $request->email;
+      $obj->enable_sms_notifications = $request->enable_sms_notifications ? true : false;
+      $obj->enable_email_notifications = $request->enable_email_notifications ? true : false;
+
                 $obj->save();
 
                 return redirect()->route('contacts.index');

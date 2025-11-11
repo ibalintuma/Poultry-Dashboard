@@ -82,6 +82,30 @@
                          id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
                 </div>
 
+
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">email</label>
+            <input type="email" class="form-control"
+                   name='email'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">Enable SMS notifications</label>
+            <select class="form-select" name="enable_sms_notifications" id="enable_sms_notifications" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">Enable Email Notifications</label>
+            <select class="form-select" name="enable_email_notifications" id="enable_email_notifications" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+
           <div class='mb-3 col-6'>
             <label for="defaultFormControlInput" class="form-label">address</label>
             <input type="text" class="form-control"

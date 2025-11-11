@@ -127,6 +127,31 @@
                   </div>
 
 
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">email</label>
+            <input type="email" class="form-control"
+                   name='email'
+                    value='{{ $obj->email }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">enable_sms_notifications</label>
+            <select class="form-select" name="enable_sms_notifications" id="enable_sms_notifications" required>
+              <option value="1" @if( $obj->enable_sms_notifications == "1") selected @endif >Yes</option>
+              <option value="0" @if( $obj->enable_sms_notifications == "0") selected @endif >No</option>
+            </select>
+          </div>
+
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">enable_email_notifications</label>
+            <select class="form-select" name="enable_email_notifications" id="enable_email_notifications" required>
+              <option value="1" @if( $obj->enable_email_notifications == "1") selected @endif >Yes</option>
+              <option value="0" @if( $obj->enable_email_notifications == "0") selected @endif >No</option>
+            </select>
+          </div>
+
+
           <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
           <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>
 
