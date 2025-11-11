@@ -79,7 +79,7 @@
               @endforeach
             </select>
           </div>
-          <div class="mb-3 col-4">
+          <div class="mb-3 col-6">
             <label for="exampleFormControlSelect1" class="form-label">Flock</label>
             <select class="form-select" id="exampleFormControlSelect1"
                     aria-label="Default select" name='flock_id'>
@@ -91,20 +91,9 @@
           </div>
 
 
-          <div class="mb-3 col-4">
-            <label for="exampleFormControlSelect1" class="form-label">Contact</label>
-            <select class="form-select" id="exampleFormControlSelect1"
-                    aria-label="Default select" name='contact_id'>
-              <option value="">None / Empty</option>
-              @foreach($contacts as $item)
-                <option value="{{$item->id}}">{{$item->role}} | {{$item->name}}</option>
-              @endforeach
-            </select>
-          </div>
 
 
-
-          <div class='mb-3 col-4'>
+          <div class='mb-3 col-6'>
          <label for="type" class="form-label">Type</label>
          <select class="form-select" name="type" id="type" required>
            <option value="expense">Expense</option>
@@ -139,12 +128,23 @@
          <textarea class="form-control" name="comment" id="comment"></textarea>
        </div>
 
-       <div class='mb-3 col-6'>
+       <div class='mb-3 col-4'>
          <label for="picture" class="form-label">Picture</label>
          <input type="file" class="form-control" name="picture" id="picture" accept="image/*" />
        </div>
 
-       <div class='mb-3 col-6'>
+          <div class="mb-3 col-4">
+            <label for="exampleFormControlSelect1" class="form-label">Contact</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='contact_id'>
+              <option value="">None / Empty</option>
+              @foreach($contacts as $item)
+                <option value="{{$item->id}}">{{$item->role}} | {{$item->name}}</option>
+              @endforeach
+            </select>
+          </div>
+
+       <div class='mb-3 col-4'>
          <label for="status" class="form-label">Status</label>
          <select class="form-select" name="status" id="status" required>
            <option value="completed">Completed</option>
