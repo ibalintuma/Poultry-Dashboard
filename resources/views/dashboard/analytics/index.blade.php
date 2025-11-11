@@ -222,7 +222,7 @@
   // Generate dates for the last 30 days
   function generateLast30Days() {
     const dates = [];
-    const today = new Date('2025-11-11');
+    const today = new Date('{{\Carbon\Carbon::now()->toDateString()}}');
 
     for (let i = 29; i >= 0; i--) {
       const date = new Date(today);
@@ -235,6 +235,15 @@
   // Generate realistic financial data
   function generateFinancialData() {
     const dates = generateLast30Days();
+
+    //financial_types from laravel
+    //const financial_types = [{"date":"2025-10-12","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-13","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-14","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-15","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-16","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-17","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-18","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-19","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-20","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-21","expense":3379000,"debt":0,"income":0,"capital":900000},{"date":"2025-10-22","expense":853500,"debt":0,"income":0,"capital":0},{"date":"2025-10-23","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-24","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-25","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-26","expense":119000,"debt":0,"income":0,"capital":0},{"date":"2025-10-27","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-28","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-29","expense":73000,"debt":0,"income":0,"capital":0},{"date":"2025-10-30","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-31","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-01","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-02","expense":68000,"debt":0,"income":0,"capital":0},{"date":"2025-11-03","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-04","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-05","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-06","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-07","expense":136000,"debt":36000,"income":0,"capital":0},{"date":"2025-11-08","expense":22000,"debt":22000,"income":0,"capital":0},{"date":"2025-11-09","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-10","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-11","expense":0,"debt":0,"income":0,"capital":0}];
+    const financial_types = @json($daily_data_for_last_30_days);
+    console.log(financial_types);
+
+
+
+
     const expenses = [];
     const debts = [];
     const capital = [];
