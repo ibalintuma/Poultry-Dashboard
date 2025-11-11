@@ -96,7 +96,7 @@
             <select class="form-select" id="exampleFormControlSelect1"
                     aria-label="Default select" name='contact_id'>
               <option value="">None / Empty</option>
-              @foreach($constacts as $item)
+              @foreach($contacts as $item)
                 <option value="{{$item->id}}">{{$item->role}} | {{$item->name}}</option>
               @endforeach
             </select>

@@ -30,7 +30,7 @@ class FinanceController extends Controller
       $farms = \App\Models\Farm::all();
       $flocks = \App\Models\Flock::all();
       $contacts = \App\Models\Contact::all();
-        return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks]);
+        return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts]);
     }
 
     /**
