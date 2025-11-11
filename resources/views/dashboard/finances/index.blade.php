@@ -63,6 +63,7 @@
         <th>Picture</th>
         <th>Action</th>
         <th>Comment</th>
+        <th>Contact</th>
         <th>Created At</th>
       </tr>
     </thead>
@@ -126,6 +127,11 @@
             <span class="text-nowrap" >
             {{$r->comment}}
             </span>
+          </td>
+          <td class="text-nowrap">
+            @isset($r->contact)
+              {{$r->contact->name}}
+            @endisset
           </td>
           <td>
             <span class="text-nowrap" >

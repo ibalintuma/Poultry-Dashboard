@@ -16,6 +16,7 @@ class FinanceController extends Controller
                 "list"=>Finance::orderBy("date","desc")->get()->map(function($item){
                     $item->farm = \App\Models\Farm::find($item->farm_id);
                     $item->flock = \App\Models\Flock::find($item->flock_id);
+                    $item->contact = \App\Models\Contact::find($item->contact_id);
                     return $item;
                 })
               ]);
@@ -28,6 +29,7 @@ class FinanceController extends Controller
     {
       $farms = \App\Models\Farm::all();
       $flocks = \App\Models\Flock::all();
+      $contacts = \App\Models\Contact::all();
         return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks]);
     }
 
@@ -45,6 +47,7 @@ class FinanceController extends Controller
                           $obj->comment = $request->comment;
                           $obj->flock_id = $request->flock_id;
                           $obj->farm_id = $request->farm_id;
+                          $obj->contact_id = $request->contact_id;
 
                           if ($files = $request->file('picture')){
                               $fName = time().'.'.$request->picture->extension();
@@ -72,7 +75,8 @@ class FinanceController extends Controller
     {
         $farms = \App\Models\Farm::all();
         $flocks = \App\Models\Flock::all();
-        return view("dashboard.finances.edit", ["obj" => $finance, "farms"=>$farms,"flocks"=>$flocks]);
+        $contacts = \App\Models\Contact::all();
+        return view("dashboard.finances.edit", ["obj" => $finance, "farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts ]);
     }
 
     /**
@@ -89,6 +93,7 @@ class FinanceController extends Controller
           $obj->flock_id = $request->flock_id;
           $obj->farm_id = $request->farm_id;
           $obj->status = $request->status;
+          $obj->contact_id = $request->contact_id;
 
           if ($files = $request->file('picture')){
               $fName = time().'.'.$request->picture->extension();

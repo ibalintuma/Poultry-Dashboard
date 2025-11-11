@@ -117,6 +117,21 @@
                            id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
                   </div>
 
+
+          <div class="mb-3 col-4">
+            <label for="exampleFormControlSelect1" class="form-label">Contact</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='contact_id'>
+              <option value="">None / Empty</option>
+              @foreach($constacts as $item)
+                <option value="{{$item->id}}"
+                  @if($obj->contact_id == $item->id) selected @endif
+                >{{$item->role}} | {{$item->name}}</option>
+              @endforeach
+            </select>
+          </div>
+
+
           <div class='mb-3'>
                     <label for="defaultFormControlInput" class="form-label">status</label>
                     <select class="form-select" name="status" id="status" required>
