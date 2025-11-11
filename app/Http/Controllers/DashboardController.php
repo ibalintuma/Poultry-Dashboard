@@ -55,6 +55,14 @@ class DashboardController extends Controller
       }
 
 
+      $calenders = \App\Models\Calender::whereDate("date", ">=", now())
+        ->orderBy("date","asc")
+        ->get()
+        ->map(function($item){
+          $item->contact = \App\Models\Contact::find($item->contact_id);
+          return $item;
+        });
+
         return view('dashboard.analytics.index',[
           "expenses_total" => \App\Models\Finance::where("type","expense")->sum('amount'),
 
@@ -74,6 +82,8 @@ class DashboardController extends Controller
           "chicken_out_got_out_total" => \App\Models\FlockOut::where("type","got-out")->sum('quantity'),
 
           "chicken_loss_data"=>$chicken_loss_data
+
+          ,"calenders"=>$calenders
         ]);
     }
 }

@@ -26,6 +26,7 @@ Route::get('/home',[\App\Http\Controllers\DashboardController::class,"index"])->
 Route::get('/dashboard/analytics',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-analytics');
 Route::get('/dashboard/ecommerce',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-ecommerce');
 Route::get('/dashboard/x',[\App\Http\Controllers\dashboard\Ecommerce::class,"index"])->name('dashboard-x');
+Route::get('/dashboard/y',[\App\Http\Controllers\dashboard\Analytics::class,"index"])->name('dashboard-y');
 
 // locale
 Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
@@ -201,3 +202,4 @@ Route::resource("stocks", App\Http\Controllers\StockController::class);
 Route::resource("stock_transfers", App\Http\Controllers\StockTransferController::class);
 Route::resource("treatments", App\Http\Controllers\TreatmentController::class);
 Route::resource("contacts", App\Http\Controllers\ContactController::class);
+Route::resource("calenders", App\Http\Controllers\CalenderController::class);

@@ -3,12 +3,12 @@
     {
       "url": "",
       "name": "Dashboard",
-      "icon": "menu-icon tf-icons bx bx-layer",
+      "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "app-dashboard"
     },{
       "url": "flocks",
       "name": "Flocks",
-      "icon": "menu-icon tf-icons bx bx-layer",
+      "icon": "menu-icon tf-icons bx bx-group",
       "slug": "app-flocks"
     },
     {
@@ -26,7 +26,7 @@
     {
       "url": "stocks",
       "name": "Stock",
-      "icon": "menu-icon tf-icons bx bx-cube",
+      "icon": "menu-icon tf-icons bx bx-package",
       "slug": "app-stocks"
     },
     {
@@ -44,14 +44,20 @@
     {
       "url": "farms",
       "name": "Farms",
-      "icon": "menu-icon tf-icons bx bx-barn",
+      "icon": "menu-icon tf-icons bx bx-home-heart",
       "slug": "app-farms"
     },
     {
       "url": "contacts",
       "name": "Contacts",
-      "icon": "menu-icon tf-icons bx bx-barn",
+      "icon": "menu-icon tf-icons bx bx-user-circle",
       "slug": "app-contacts"
+    },
+    {
+      "url": "calenders",
+      "name": "Calender",
+      "icon": "menu-icon tf-icons bx bx-calendar",
+      "slug": "app-calenders"
     }
   ]
 }

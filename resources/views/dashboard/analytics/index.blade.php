@@ -1149,5 +1149,48 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Marketing Campaigns -->
+  <div class="col-xl-8">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">Calenders | Task Scheduler | Event</h5>
+      </div>
+      <div class="table-responsive">
+        <table class="table border-top">
+          <thead>
+          <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Amount Needed</th>
+            <th>status</th>
+          </tr>
+          </thead>
+          <tbody class="table-border-bottom-0">
+            @foreach($calenders as $calender)
+              <tr>
+                <td class="text-nowrap">
+                  {{ \Carbon\Carbon::parse($calender->date)->format('M d, Y') }}
+                </td>
+                <td class="text-nowrap"> <b>{{strtoupper($calender->type)}}</b> | {{$calender->title}}</td>
+                <td class="">
+                  <div style="width: 200px" >
+                    {{$calender->description}}
+                  </div>
+                </td>
+                <td><span>UGX {{number_format($calender->amount)}}</span></td>
+                <td class="text-nowrap"><span class="badge bg-label-dark">{{$calender->status}}</span></td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!--/ Marketing Campaigns -->
+
+
 </div>
 @endsection
