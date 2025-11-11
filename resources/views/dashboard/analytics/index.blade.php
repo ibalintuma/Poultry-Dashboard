@@ -219,61 +219,20 @@
 
 
 <script>
-  // Generate dates for the last 30 days
-  function generateLast30Days() {
-    const dates = [];
-    const today = new Date('{{\Carbon\Carbon::now()->toDateString()}}');
 
-    for (let i = 29; i >= 0; i--) {
-      const date = new Date(today);
-      date.setDate(date.getDate() - i);
-      dates.push(date.toISOString().split('T')[0]);
-    }
-    return dates;
-  }
 
   // Generate realistic financial data
   function generateFinancialData() {
-    const dates = generateLast30Days();
 
     //financial_types from laravel
     //const financial_types = [{"date":"2025-10-12","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-13","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-14","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-15","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-16","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-17","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-18","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-19","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-20","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-21","expense":3379000,"debt":0,"income":0,"capital":900000},{"date":"2025-10-22","expense":853500,"debt":0,"income":0,"capital":0},{"date":"2025-10-23","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-24","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-25","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-26","expense":119000,"debt":0,"income":0,"capital":0},{"date":"2025-10-27","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-28","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-29","expense":73000,"debt":0,"income":0,"capital":0},{"date":"2025-10-30","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-10-31","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-01","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-02","expense":68000,"debt":0,"income":0,"capital":0},{"date":"2025-11-03","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-04","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-05","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-06","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-07","expense":136000,"debt":36000,"income":0,"capital":0},{"date":"2025-11-08","expense":22000,"debt":22000,"income":0,"capital":0},{"date":"2025-11-09","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-10","expense":0,"debt":0,"income":0,"capital":0},{"date":"2025-11-11","expense":0,"debt":0,"income":0,"capital":0}];
     const financial_types = @json($daily_data_for_last_30_days);
-    console.log(financial_types);
 
-
-
-
-    const expenses = [];
-    const debts = [];
-    const capital = [];
-    const income = [];
-
-    let baseCapital = 75000;
-    let baseDebt = 30000;
-
-    for (let i = 0; i < 30; i++) {
-      // Expenses: $1000-$2500 per day with some variation
-      const dailyExpense = 1000 + Math.random() * 1500 + Math.sin(i / 3) * 300;
-      expenses.push(Math.round(dailyExpense));
-
-      // Debts: Gradually decreasing with payments
-      const debtPayment = Math.random() * 500;
-      baseDebt = Math.max(baseDebt - debtPayment, 25000);
-      debts.push(Math.round(baseDebt));
-
-      // Income: $1500-$3000 per day (workdays higher)
-      const dayOfWeek = (i + 2) % 7; // Starting from Tuesday
-      const isWeekday = dayOfWeek < 5;
-      const dailyIncome = isWeekday ?
-        1800 + Math.random() * 1200 :
-        800 + Math.random() * 500;
-      income.push(Math.round(dailyIncome));
-
-      // Capital: Income - Expenses + previous capital
-      baseCapital = baseCapital + dailyIncome - dailyExpense;
-      capital.push(Math.round(baseCapital));
-    }
+    const dates = financial_types.map(entry => entry.date);
+    const expenses = financial_types.map(entry => entry.expense);
+    const debts = financial_types.map(entry => entry.debt);
+    const capital = financial_types.map(entry => entry.capital);
+    const income = financial_types.map(entry => entry.income);
 
     return { dates, expenses, debts, capital, income };
   }
@@ -305,7 +264,7 @@
       }
     ],
     chart: {
-      height: 450,
+      height: 400,
       type: 'line',
       animations: {
         enabled: true,
@@ -384,14 +343,7 @@
     },
     xaxis: {
       categories: data.dates,
-      title: {
-        text: 'Date',
-        style: {
-          fontSize: '13px',
-          fontWeight: 600,
-          color: '#64748b'
-        }
-      },
+
       labels: {
         rotate: -45,
         rotateAlways: false,
@@ -416,7 +368,7 @@
     },
     yaxis: {
       title: {
-        text: 'Amount ($)',
+        text: 'Amount (UGX)',
         style: {
           fontSize: '13px',
           fontWeight: 600,
@@ -429,7 +381,7 @@
           colors: '#64748b'
         },
         formatter: function(value) {
-          return '$' + value.toLocaleString();
+          return 'UGX ' + value.toLocaleString();
         }
       }
     },
@@ -453,7 +405,7 @@
       },
       y: {
         formatter: function(value, { seriesIndex }) {
-          return '$' + value.toLocaleString();
+          return 'UGX ' + value.toLocaleString();
         }
       },
       marker: {
@@ -521,6 +473,622 @@
         `);
 </script>
 
+
+
+  {{--chicken inventory--}}
+
+
+<script>
+  // Chicken inventory data
+  const chickenData = {
+    healthy: {{$chicken_received_total - $chicken_out_total}},
+    sold: {{$chicken_out_sold_total}},
+    gift: {{$chicken_out_gift_total}},
+    gotOut: {{$chicken_out_got_out_total}},
+    died: {{$chicken_out_died_total}}
+  };
+
+  const total = Object.values(chickenData).reduce((a, b) => a + b, 0);
+
+  // Bar Chart Configuration
+  var options = {
+    series: [{
+      name: 'Chickens',
+      data: [
+        chickenData.healthy,
+        chickenData.sold,
+        chickenData.gift,
+        chickenData.gotOut,
+        chickenData.died
+      ]
+    }],
+    chart: {
+      type: 'bar',
+      height: 400,
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: false,
+          zoomout: false,
+          pan: false,
+          reset: false
+        }
+      },
+      animations: {
+        enabled: true,
+        speed: 800,
+        animateGradually: {
+          enabled: true,
+          delay: 150
+        }
+      }
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '60%',
+        borderRadius: 8,
+        distributed: true,
+        dataLabels: {
+          position: 'top'
+        }
+      }
+    },
+    colors: ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b', '#ef4444'],
+    dataLabels: {
+      enabled: true,
+      formatter: function(val) {
+        return val + ' chicks';
+      },
+      offsetY: -25,
+      style: {
+        fontSize: '13px',
+        fontWeight: 'bold',
+        colors: ['#1e293b']
+      },
+      background: {
+        enabled: true,
+        foreColor: '#fff',
+        padding: 6,
+        borderRadius: 4,
+        borderWidth: 1,
+        borderColor: '#e2e8f0',
+        opacity: 0.9
+      }
+    },
+    xaxis: {
+      categories: ['Healthy', 'Sold', 'Gift', 'Got Out', 'Died'],
+      labels: {
+        style: {
+          fontSize: '14px',
+          fontWeight: 600,
+          colors: ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b', '#ef4444']
+        }
+      },
+      axisBorder: {
+        show: true,
+        color: '#e2e8f0'
+      },
+      axisTicks: {
+        show: true,
+        color: '#e2e8f0'
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Number of Chickens',
+        style: {
+          fontSize: '14px',
+          fontWeight: 600,
+          color: '#64748b'
+        }
+      },
+      labels: {
+        style: {
+          fontSize: '13px',
+          colors: '#64748b'
+        },
+        formatter: function(val) {
+          return Math.round(val);
+        }
+      },
+      min: 0,
+      max: Math.max(...Object.values(chickenData)) + 100
+    },
+    title: {
+      text: 'Chicken Inventory Distribution',
+      align: 'center',
+      style: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: '#1e293b'
+      }
+    },
+    subtitle: {
+      text: 'Total: ' + total + ' chickens',
+      align: 'center',
+      style: {
+        fontSize: '14px',
+        color: '#64748b'
+      }
+    },
+    grid: {
+      borderColor: '#e2e8f0',
+      strokeDashArray: 4,
+      xaxis: {
+        lines: {
+          show: false
+        }
+      },
+      yaxis: {
+        lines: {
+          show: true
+        }
+      },
+      padding: {
+        top: 0,
+        right: 20,
+        bottom: 0,
+        left: 20
+      }
+    },
+    legend: {
+      show: false
+    },
+    tooltip: {
+      enabled: true,
+      theme: 'light',
+      style: {
+        fontSize: '13px'
+      },
+      y: {
+        formatter: function(val) {
+          const percentage = ((val / total) * 100).toFixed(2);
+          return val + ' chicks (' + percentage + '% of total)';
+        },
+        title: {
+          formatter: function() {
+            return '';
+          }
+        }
+      },
+      marker: {
+        show: true
+      }
+    },
+    responsive: [{
+      breakpoint: 600,
+      options: {
+        chart: {
+          height: 400
+        },
+        plotOptions: {
+          bar: {
+            columnWidth: '70%'
+          }
+        },
+        dataLabels: {
+          style: {
+            fontSize: '11px'
+          }
+        }
+      }
+    }]
+  };
+
+  // Render the chart
+  var chart = new ApexCharts(document.querySelector("#analyticsChickenInventoryChart"), options);
+  chart.render();
+
+  // Log summary to console
+  console.log(`
+╔════════════════════════════════════════════════════════════╗
+║         🐔 Chicken Inventory Report                        ║
+║         User: ibalintuma                                   ║
+║         Date: 2025-11-11 01:53:23 UTC                     ║
+╠════════════════════════════════════════════════════════════╣
+║ ✅ Healthy:    ${chickenData.healthy} chickens (${((chickenData.healthy/total)*100).toFixed(2)}%)              ║
+║ 💰 Sold:       ${chickenData.sold} chickens (${((chickenData.sold/total)*100).toFixed(2)}%)                ║
+║ 🎁 Gift:       ${chickenData.gift} chickens (${((chickenData.gift/total)*100).toFixed(2)}%)                ║
+║ 🚪 Got Out:    ${chickenData.gotOut} chickens (${((chickenData.gotOut/total)*100).toFixed(2)}%)                ║
+║ 💀 Died:       ${chickenData.died} chickens (${((chickenData.died/total)*100).toFixed(2)}%)                 ║
+╠════════════════════════════════════════════════════════════╣
+║ 📊 TOTAL:      ${total} chickens (100%)                        ║
+╚════════════════════════════════════════════════════════════╝
+        `);
+</script>
+
+  {{--loss analysis--}}
+
+<script>
+  // Generate chicken loss data per flock/batch (DYNAMIC BATCHES)
+  function generateChickenLossData() {
+    // Chicken loss data from Laravel backend
+    
+
+    const chicken_loss_data = [
+      {"date":"2025-10-12","batches":{"Batch A":0,"Batch B":0,"Batch C":0},"total_loss":0},
+      {"date":"2025-10-13","batches":{"Batch A":2,"Batch B":1,"Batch C":0},"total_loss":3},
+      {"date":"2025-10-14","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
+      {"date":"2025-10-15","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
+      {"date":"2025-10-16","batches":{"Batch A":3,"Batch B":1,"Batch C":2},"total_loss":6},
+      {"date":"2025-10-17","batches":{"Batch A":1,"Batch B":0,"Batch C":0},"total_loss":1},
+      {"date":"2025-10-18","batches":{"Batch A":0,"Batch B":1,"Batch C":1},"total_loss":2},
+      {"date":"2025-10-19","batches":{"Batch A":2,"Batch B":0,"Batch C":0},"total_loss":2},
+      {"date":"2025-10-20","batches":{"Batch A":1,"Batch B":1,"Batch C":1},"total_loss":3},
+      {"date":"2025-10-21","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
+      {"date":"2025-10-22","batches":{"Batch A":2,"Batch B":0,"Batch C":2},"total_loss":4},
+      {"date":"2025-10-23","batches":{"Batch A":0,"Batch B":1,"Batch C":0},"total_loss":1},
+      {"date":"2025-10-24","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
+      {"date":"2025-10-25","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
+      {"date":"2025-10-26","batches":{"Batch A":3,"Batch B":1,"Batch C":2},"total_loss":6},
+      {"date":"2025-10-27","batches":{"Batch A":1,"Batch B":0,"Batch C":0},"total_loss":1},
+      {"date":"2025-10-28","batches":{"Batch A":0,"Batch B":1,"Batch C":1},"total_loss":2},
+      {"date":"2025-10-29","batches":{"Batch A":2,"Batch B":2,"Batch C":0},"total_loss":4},
+      {"date":"2025-10-30","batches":{"Batch A":0,"Batch B":0,"Batch C":1},"total_loss":1},
+      {"date":"2025-10-31","batches":{"Batch A":1,"Batch B":1,"Batch C":0},"total_loss":2},
+      {"date":"2025-11-01","batches":{"Batch A":0,"Batch B":0,"Batch C":2},"total_loss":2},
+      {"date":"2025-11-02","batches":{"Batch A":2,"Batch B":1,"Batch C":0},"total_loss":3},
+      {"date":"2025-11-03","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
+      {"date":"2025-11-04","batches":{"Batch A":0,"Batch B":2,"Batch C":0},"total_loss":2},
+      {"date":"2025-11-05","batches":{"Batch A":3,"Batch B":0,"Batch C":2},"total_loss":5},
+      {"date":"2025-11-06","batches":{"Batch A":0,"Batch B":1,"Batch C":0},"total_loss":1},
+      {"date":"2025-11-07","batches":{"Batch A":1,"Batch B":0,"Batch C":1},"total_loss":2},
+      {"date":"2025-11-08","batches":{"Batch A":2,"Batch B":2,"Batch C":0},"total_loss":4},
+      {"date":"2025-11-09","batches":{"Batch A":0,"Batch B":1,"Batch C":1},"total_loss":2},
+      {"date":"2025-11-10","batches":{"Batch A":1,"Batch B":0,"Batch C":0},"total_loss":1},
+      {"date":"2025-11-11","batches":{"Batch A":0,"Batch B":0,"Batch C":0},"total_loss":0}
+    ];
+
+    const dates = chicken_loss_data.map(entry => entry.date);
+    const totalLoss = chicken_loss_data.map(entry => entry.total_loss);
+
+    // Extract batch names dynamically from the first entry
+    const batchNames = Object.keys(chicken_loss_data[0].batches);
+
+    // Create data arrays for each batch dynamically
+    const batchData = {};
+    const cumulativeBatchData = {};
+
+    batchNames.forEach(batchName => {
+      batchData[batchName] = chicken_loss_data.map(entry => entry.batches[batchName] || 0);
+
+      // Calculate cumulative for this batch
+      let cumSum = 0;
+      cumulativeBatchData[batchName] = batchData[batchName].map(val => {
+        cumSum += val;
+        return cumSum;
+      });
+    });
+
+    // Calculate cumulative total
+    const cumulativeTotal = [];
+    let sumTotal = 0;
+
+    for (let i = 0; i < dates.length; i++) {
+      sumTotal += totalLoss[i];
+      cumulativeTotal.push(sumTotal);
+    }
+
+    return {
+      dates,
+      batchNames,
+      batchData,
+      cumulativeBatchData,
+      totalLoss,
+      cumulativeTotal
+    };
+  }
+
+  const data = generateChickenLossData();
+
+  // Define colors for batches (will cycle through if more batches than colors)
+  const batchColors = [
+    '#3b82f6', // Blue
+    '#10b981', // Green
+    '#f59e0b', // Orange
+    '#8b5cf6', // Purple
+    '#ec4899', // Pink
+    '#06b6d4', // Cyan
+    '#84cc16', // Lime
+    '#f97316', // Orange-red
+    '#14b8a6', // Teal
+    '#a855f7'  // Violet
+  ];
+
+  // Build series dynamically
+  const series = [];
+  const colors = [];
+
+  data.batchNames.forEach((batchName, index) => {
+    series.push({
+      name: `${batchName} - Daily Loss`,
+      data: data.batchData[batchName],
+      type: 'line'
+    });
+    colors.push(batchColors[index % batchColors.length]);
+  });
+
+  // Add total line (thicker, red)
+  series.push({
+    name: 'Total Daily Loss',
+    data: data.totalLoss,
+    type: 'line'
+  });
+  colors.push('#ef4444');
+
+  // Calculate totals for summary
+  const batchTotals = {};
+  data.batchNames.forEach(batchName => {
+    batchTotals[batchName] = data.cumulativeBatchData[batchName][data.cumulativeBatchData[batchName].length - 1];
+  });
+  const grandTotalLoss = data.cumulativeTotal[data.cumulativeTotal.length - 1];
+
+  // Build stroke widths dynamically (all batches get 2, total gets 4)
+  const strokeWidths = data.batchNames.map(() => 2).concat([4]);
+
+  // Chart configuration
+  var options = {
+    series: series,
+    chart: {
+      height: 450,
+      type: 'line',
+      animations: {
+        enabled: true,
+        speed: 800,
+        animateGradually: {
+          enabled: true,
+          delay: 150
+        }
+      },
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true
+        }
+      },
+      zoom: {
+        enabled: true,
+        type: 'x',
+        autoScaleYaxis: true
+      }
+    },
+    colors: colors,
+    stroke: {
+      width: strokeWidths,
+      curve: 'smooth',
+      dashArray: 0
+    },
+    title: {
+      text: 'Chicken Loss Rate - Last 30 Days',
+      align: 'left',
+      style: {
+        fontSize: '20px',
+        fontWeight: 'bold',
+        color: '#1e293b'
+      }
+    },
+    subtitle: {
+      text: `Daily chicken loss per batch/flock (${data.batchNames.length} batches) | User: ibalintuma | Generated: 2025-11-11 02:25:42 UTC`,
+      align: 'left',
+      style: {
+        fontSize: '14px',
+        color: '#64748b'
+      }
+    },
+    grid: {
+      borderColor: '#e2e8f0',
+      strokeDashArray: 4,
+      xaxis: {
+        lines: {
+          show: true
+        }
+      },
+      yaxis: {
+        lines: {
+          show: true
+        }
+      },
+      padding: {
+        top: 0,
+        right: 10,
+        bottom: 0,
+        left: 10
+      }
+    },
+    markers: {
+      size: 0,
+      hover: {
+        size: 6
+      }
+    },
+    xaxis: {
+      categories: data.dates,
+      title: {
+        text: 'Date',
+        style: {
+          fontSize: '13px',
+          fontWeight: 600,
+          color: '#64748b'
+        }
+      },
+      labels: {
+        rotate: -45,
+        rotateAlways: false,
+        style: {
+          fontSize: '11px',
+          colors: '#64748b'
+        },
+        formatter: function(value) {
+          if (!value) return '';
+          const date = new Date(value);
+          return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
+      },
+      axisBorder: {
+        show: true,
+        color: '#e2e8f0'
+      },
+      axisTicks: {
+        show: true,
+        color: '#e2e8f0'
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Number of Chickens Lost',
+        style: {
+          fontSize: '13px',
+          fontWeight: 600,
+          color: '#64748b'
+        }
+      },
+      labels: {
+        style: {
+          fontSize: '11px',
+          colors: '#64748b'
+        },
+        formatter: function(value) {
+          return Math.round(value) + ' chickens';
+        }
+      },
+      min: 0
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+      theme: 'light',
+      style: {
+        fontSize: '13px'
+      },
+      x: {
+        formatter: function(value, { dataPointIndex }) {
+          const date = new Date(data.dates[dataPointIndex]);
+          return date.toLocaleDateString('en-US', {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          });
+        }
+      },
+      y: {
+        formatter: function(value, { seriesIndex, dataPointIndex }) {
+          // Get cumulative value for this series
+          let cumulative;
+          if (seriesIndex < data.batchNames.length) {
+            // It's a batch
+            const batchName = data.batchNames[seriesIndex];
+            cumulative = data.cumulativeBatchData[batchName][dataPointIndex];
+          } else {
+            // It's the total
+            cumulative = data.cumulativeTotal[dataPointIndex];
+          }
+          return value + ' chickens (Total: ' + cumulative + ')';
+        }
+      },
+      marker: {
+        show: true
+      }
+    },
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'right',
+      fontSize: '13px',
+      fontWeight: 600,
+      markers: {
+        width: 12,
+        height: 12,
+        radius: 3
+      },
+      itemMargin: {
+        horizontal: 15,
+        vertical: 10
+      },
+      onItemClick: {
+        toggleDataSeries: true
+      },
+      onItemHover: {
+        highlightDataSeries: true
+      }
+    },
+    annotations: {
+      yaxis: [
+        {
+          y: 5,
+          borderColor: '#ef4444',
+          strokeDashArray: 5,
+          label: {
+            borderColor: '#ef4444',
+            style: {
+              color: '#fff',
+              background: '#ef4444',
+              fontSize: '11px',
+              fontWeight: 600
+            },
+            text: 'High Loss Alert (5+ chickens/day)'
+          }
+        }
+      ]
+    },
+    responsive: [{
+      breakpoint: 768,
+      options: {
+        chart: {
+          height: 350
+        },
+        legend: {
+          position: 'bottom'
+        },
+        xaxis: {
+          labels: {
+            rotate: -90
+          }
+        }
+      }
+    }]
+  };
+
+  // Render the chart
+  var chart = new ApexCharts(document.querySelector("#analyticsChickenLossChart"), options);
+  chart.render();
+
+  // Build console summary dynamically
+  let batchSummary = '';
+  data.batchNames.forEach(batchName => {
+    const total = batchTotals[batchName];
+    const padding = ' '.repeat(Math.max(0, 17 - batchName.length));
+    batchSummary += `║ ${batchName}${padding}  ${total} chickens                            ║\n`;
+  });
+
+  // Log summary to console
+  console.log(`
+╔════════════════════════════════════════════════════════════╗
+║      🐔 Chicken Loss Analytics - ibalintuma                ║
+║                 Last 30 Days Summary                       ║
+╠════════════════════════════════════════════════════════════╣
+║ Period: Oct 12 - Nov 11, 2025                             ║
+║ Generated: 2025-11-11 02:25:42 UTC                        ║
+║ Total Batches: ${data.batchNames.length}                                           ║
+╠════════════════════════════════════════════════════════════╣
+${batchSummary}╠════════════════════════════════════════════════════════════╣
+║ GRAND TOTAL LOSS:    ${grandTotalLoss} chickens                          ║
+║ Average Daily Loss:  ${(grandTotalLoss / 30).toFixed(2)} chickens/day                   ║
+║ Average per Batch:   ${(grandTotalLoss / data.batchNames.length).toFixed(2)} chickens                       ║
+╚════════════════════════════════════════════════════════════╝
+  `);
+</script>
+
 @endsection
 
 @section('content')
@@ -538,12 +1106,39 @@
   <div class="col-lg-3 col-md-12">
     <div class="row">
       <!-- Referral Chart-->
-      <div class="col-sm-12 col-12 mb-4">
-        <div class="card">
+      <div class="col-12  mb-4">
+        <div class="card h-100">
           <div class="card-body text-center">
-            <h2 class="mb-1">UGX {{number_format($expenses_total)}}</h2>
-            <span class="text-muted"></span>
-            <div id="referralLineChart"></div>
+            <span class="d-block text-nowrap">Total Expense</span>
+            <h5 class="mb-0">UGX {{number_format($expenses_total)}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="col-12  mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+            <span class="d-block text-nowrap">Debt Pending</span>
+            <h5 class="mb-0 text-danger">UGX {{number_format($debt_total - $debt_paid_total)}}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12  mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+
+            <span class="d-block text-nowrap">Total Chicken Ongoing</span>
+            <h5 class="mb-0 text-success">{{number_format($chicken_received_total - $chicken_out_total)}} Chicks</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12  mb-4">
+        <div class="card h-100">
+          <div class="card-body text-center">
+
+            <span class="d-block text-nowrap">Total Chicken Dead</span>
+            <h5 class="mb-0">{{number_format($chicken_out_died_total)}} Chicks</h5>
           </div>
         </div>
       </div>
@@ -553,55 +1148,12 @@
 
 
 
-
-
-      <!-- Growth Chart-->
-      <div class="col-sm-12 col-12 mb-4">
-        <div class="row">
-          <div class="col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="avatar">
-                      <span class="avatar-initial bg-label-primary rounded-circle"><i class="bx bx-user fs-4"></i></span>
-                    </div>
-                    <div class="card-info">
-                      <h5 class="card-title mb-0 me-2">----</h5>
-                      <small class="text-muted">Chicken</small>
-                    </div>
-                  </div>
-                  <div id="conversationChart"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-12 mb-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex justify-content-between">
-                  <div class="d-flex align-items-center gap-3">
-                    <div class="avatar">
-                      <span class="avatar-initial bg-label-warning rounded-circle"><i class="bx bx-dollar fs-4"></i></span>
-                    </div>
-                    <div class="card-info">
-                      <h5 class="card-title mb-0 me-2">----</h5>
-                      <small class="text-muted">Contacts</small>
-                    </div>
-                  </div>
-                  <div id="incomeChart"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <!--/ Referral, conversion, impression & income charts -->
 
   <!-- Activity -->
-  <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-4 mb-4">
+  <div class="col-md-4 col-12 mb-4">
     <div class="card">
       <div class="card-header">
         <h5 class="card-title mb-0">Financial Data</h5>
@@ -631,7 +1183,7 @@
   <!--/ Activity -->
 
 
-  <div class="col-sm-5 col-12 mb-4">
+  <div class="col-md-4 col-12 mb-4">
     <div class="card">
       <div class="card-body text-center">
         <h4>🐔{{number_format($chickens_total)}} Chicken</h4>
@@ -639,7 +1191,8 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-5 col-12 mb-4">
+
+  <div class="col-md-4 col-12 mb-4">
     <div class="card">
       <div class="card-body text-center">
         <h4>💰UGX {{number_format($debt_total)}} Financial Debt</h4>
@@ -648,5 +1201,19 @@
     </div>
   </div>
 
+  <div class="col-lg-6 col-md-12 mb-4">
+    <div class="card">
+      <div class="card-body pb-2">
+        <div id="analyticsChickenInventoryChart"></div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-12 mb-4">
+    <div class="card">
+      <div class="card-body pb-2">
+        <div id="analyticsChickenLossChart"></div>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection

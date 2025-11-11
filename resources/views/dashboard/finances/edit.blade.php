@@ -106,7 +106,7 @@
 <div class='mb-3'>
   <label for="flock_id" class="form-label">Flock</label>
   <select class="form-select" name="flock_id" id="flock_id">
-    <option value="">Select Flock</option>
+    <option value="">None / Empty</option>
     @foreach($flocks as $flock)
       <option value="{{ $flock->id }}" {{ $obj->flock_id == $flock->id ? 'selected' : '' }}>
         {{ $flock->name }}

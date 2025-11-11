@@ -49,6 +49,7 @@ class FlockOutController extends Controller
                         $obj->reason = $request->reason;
                         $obj->date = $request->date;
                         $obj->comment = $request->comment;
+                        $obj->type = $request->type;
                         $obj->save();
 
                 return redirect( $request->previous_url );
@@ -82,6 +83,7 @@ class FlockOutController extends Controller
               $obj->reason = $request->reason;
               $obj->date = $request->date;
               $obj->comment = $request->comment;
+              $obj->type = $request->type;
               $obj->save();
 
               return redirect()->route('flock_outs.index');

@@ -48,6 +48,7 @@ class FlockController extends Controller
                       $obj->date = $request->date;
                       $obj->seller = $request->seller;
                       $obj->status = $request->status;
+                      $obj->comment = $request->comment;
 
                       if ($files = $request->file('picture')){
                           $fName = time().'.'.$request->picture->extension();
@@ -91,6 +92,7 @@ class FlockController extends Controller
       $obj->date = $request->date;
       $obj->seller = $request->seller;
       $obj->status = $request->status;
+      $obj->comment = $request->comment;
 
           if ($files = $request->file('picture')){
               $fName = time().'.'.$request->picture->extension();

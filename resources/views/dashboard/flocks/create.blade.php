@@ -129,6 +129,13 @@
           </select>
         </div>
 
+        <div class='mb-3'>
+                  <label for="defaultFormControlInput" class="form-label">comment</label>
+                  <input type="text" class="form-control"
+                         name='comment'
+                         id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                </div>
+
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
         <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>
 

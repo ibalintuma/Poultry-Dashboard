@@ -45,7 +45,13 @@ class DashboardController extends Controller
           "chicken_received_total" => \App\Models\Flock::whereIn("status",["ongoing","sold"])->sum('quantity'),
 
           "financial_types"=>$financial_types,
-          "daily_data_for_last_30_days"=>$daily_data_for_last_30_days
+          "daily_data_for_last_30_days"=>$daily_data_for_last_30_days,
+
+          "chicken_out_total" => \App\Models\FlockOut::sum('quantity'),
+          "chicken_out_sold_total" => \App\Models\FlockOut::where("type","sold")->sum('quantity'),
+          "chicken_out_died_total" => \App\Models\FlockOut::where("type","died")->sum('quantity'),
+          "chicken_out_gift_total" => \App\Models\FlockOut::where("type","gift")->sum('quantity'),
+          "chicken_out_got_out_total" => \App\Models\FlockOut::where("type","got-out")->sum('quantity'),
         ]);
     }
 }

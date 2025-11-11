@@ -66,6 +66,7 @@
 
         @csrf
 
+        <div class="row">
         <div class='mb-3'>
           <label for="defaultFormControlInput" class="form-label">flock</label>
           <select class="form-select " @isset($flock_id) readonly  @endisset name='flock_id' aria-label="Default select example">
@@ -76,7 +77,20 @@
             @endforeach
           </select>
         </div>
-        <div class='mb-3'>
+
+
+
+        <div class='mb-3 col-6'>
+          <label for="type" class="form-label">Type</label>
+          <select class="form-select" name="type" id="type" required>
+            <option value="died">Died</option>
+            <option value="sold">Sold</option>
+            <option value="got-out">Got Out</option>
+            <option value="gift">Gift</option>
+          </select>
+        </div>
+
+        <div class='mb-3 col-6'>
           <label for="defaultFormControlInput" class="form-label">date</label>
           <input type="date" class="form-control"
                  name='date'
@@ -85,19 +99,19 @@
 
         <div class='mb-3'>
           <label for="defaultFormControlInput" class="form-label">quantity</label>
-          <input type="text" class="form-control"
+          <input type="number" class="form-control"
                  name='quantity'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
-        <div class='mb-3'>
+        <div class='mb-3 col-6'>
           <label for="defaultFormControlInput" class="form-label">reason</label>
           <input type="text" class="form-control"
                  name='reason'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
-        <div class='mb-3'>
+        <div class='mb-3 col-6'>
           <label for="defaultFormControlInput" class="form-label">comment</label>
           <input type="text" class="form-control"
                  name='comment'
@@ -105,7 +119,7 @@
         </div>
 
         <input type="text" value="{{url()->previous()}}" name="previous_url" class="d-none">
-
+        </div>
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
         <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>
 

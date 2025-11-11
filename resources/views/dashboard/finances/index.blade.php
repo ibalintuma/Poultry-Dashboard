@@ -68,7 +68,13 @@
     </thead>
     <tbody>
       @foreach($list as $r)
-        <tr>
+        <tr
+        class="
+        @if( $r->type == "debt" && $r->status == "pending")
+          bg-label-danger text-dark
+        @endif
+        "
+        >
           <td>
             <span class="text-nowrap" >
               {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
@@ -83,7 +89,7 @@
             @elseif($r->type == "loan") bg-secondary
             @endif
              text-white">{{$r->type}}</span>
-            @if($r->type == "debt")
+            @if($r->type == "debt" || $r->type == "loan")
              <span class="small">{{$r->status}}</span>
             @endif
           </td>

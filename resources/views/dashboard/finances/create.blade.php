@@ -86,7 +86,7 @@
               @foreach($flocks as $item)
                 <option value="{{$item->id}}">{{$item->name}}  (qty: {{$item->quantity}})</option>
               @endforeach
-              <option value="">Select</option>
+              <option value="">None / Empty</option>
             </select>
           </div>
 
@@ -106,7 +106,9 @@
 
           <div class='mb-3 col-6'>
             <label for="date" class="form-label">Date</label>
-            <input type="date" class="form-control" name="date" id="date" required />
+            <input type="date" class="form-control" name="date"
+                   value='{{date("Y-m-d")}}'
+                   id="date" required />
           </div>
 
        <div class='mb-3 col-6'>

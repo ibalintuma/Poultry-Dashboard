@@ -59,6 +59,7 @@
           <th>date</th>
           <th>flock</th>
           <th>quantity</th>
+          <th>type</th>
           <th>reason</th>
           <th>Action</th>
           <th>comment</th>
@@ -73,6 +74,21 @@
           </td>
           <td>{{$r->flock->name}}</td>
           <td>{{$r->quantity}}</td>
+          <td>
+          <span
+            class="
+              @if($r->type == 'sale')
+                badge bg-label-success
+              @elseif($r->type == 'loss')
+                badge bg-label-danger
+              @else
+                badge bg-label-warning
+              @endif
+            "
+          >
+            {{$r->type}}
+          </span>
+          </td>
           <td>{{$r->reason}}</td>
           <td>
             <div class="row w-100">

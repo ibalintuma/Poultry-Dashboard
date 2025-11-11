@@ -64,12 +64,17 @@
           <th>qty Lost</th>
           <th>seller</th>
           <th>status</th>
+          <th>comment</th>
         </tr>
       </thead>
 
       @foreach($list as $r)
 
-        <tr>
+        <tr class="
+        @if($r->status == "ongoing")
+        bg-label-success text-dark
+        @endif
+        ">
           <td>
             <span class="text-nowrap" >
             {{$r->name}}
@@ -116,6 +121,11 @@
             <span class="badge bg-dark text-white">
               {{$r->status}}
             </span>
+          </td>
+          <td>
+            <div class="text-wrap" style="width: 300px;">
+              {{$r->comment}}
+            </div>
           </td>
 
         </tr>

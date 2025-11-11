@@ -80,6 +80,17 @@
               @endforeach
             </select>
           </div>
+
+          <div class='mb-3 col-6'>
+            <label for="type" class="form-label">Type</label>
+            <select class="form-select" name="type" id="type" required>
+              <option value="died" @if($obj->type == "died") selected @endif >Died</option>
+              <option value="sold" @if($obj->type == "sold") selected @endif >Sold</option>
+              <option value="got-out" @if($obj->type == "got-out") selected @endif >Got Out</option>
+              <option value="gift" @if($obj->type == "gift") selected @endif >Gift</option>
+            </select>
+          </div>
+
           <div class='mb-3'>
             <label for="defaultFormControlInput" class="form-label">date</label>
             <input type="date" class="form-control"

@@ -25,6 +25,7 @@ Route::get('/', [\App\Http\Controllers\DashboardController::class,"index"])->nam
 Route::get('/home',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-analytics');
 Route::get('/dashboard/analytics',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-analytics');
 Route::get('/dashboard/ecommerce',[\App\Http\Controllers\DashboardController::class,"index"])->name('dashboard-ecommerce');
+Route::get('/dashboard/x',[\App\Http\Controllers\dashboard\Ecommerce::class,"index"])->name('dashboard-x');
 
 // locale
 Route::get('lang/{locale}', $controller_path . '\language\LanguageController@swap');
