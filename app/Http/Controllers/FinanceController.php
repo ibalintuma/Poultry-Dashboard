@@ -10,13 +10,28 @@ class FinanceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+      $builder = Finance::orderBy("date","desc");
+
+      //parent_id
+      $parent_id = $request->input("parent_id");
+      if($parent_id){
+          $builder->where("parent_id",$parent_id);
+      }
+
+      //type
+      $type = $request->input("type");
+      if($type){
+          $builder->where("type",$type);
+      }
+
         return view("dashboard.finances.index",[
-                "list"=>Finance::orderBy("date","desc")->get()->map(function($item){
+                "list"=>$builder->get()->map(function($item){
                     $item->farm = \App\Models\Farm::find($item->farm_id);
                     $item->flock = \App\Models\Flock::find($item->flock_id);
                     $item->contact = \App\Models\Contact::find($item->contact_id);
+                    $item->parent = \App\Models\Finance::find($item->parent_id);
                     return $item;
                 })
               ]);
@@ -30,7 +45,8 @@ class FinanceController extends Controller
       $farms = \App\Models\Farm::all();
       $flocks = \App\Models\Flock::all();
       $contacts = \App\Models\Contact::all();
-        return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts]);
+      $finances = \App\Models\Finance::where("type","capital")->orderBy("id","desc")->get();
+        return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts, "finances"=>$finances]);
     }
 
     /**
@@ -48,6 +64,7 @@ class FinanceController extends Controller
                           $obj->flock_id = $request->flock_id;
                           $obj->farm_id = $request->farm_id;
                           $obj->contact_id = $request->contact_id;
+                          $obj->parent_id = $request->parent_id;
 
                           if ($files = $request->file('picture')){
                               $fName = time().'.'.$request->picture->extension();
@@ -76,7 +93,8 @@ class FinanceController extends Controller
         $farms = \App\Models\Farm::all();
         $flocks = \App\Models\Flock::all();
         $contacts = \App\Models\Contact::all();
-        return view("dashboard.finances.edit", ["obj" => $finance, "farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts ]);
+      $finances = \App\Models\Finance::where("type","capital")->orderBy("id","desc")->get();
+        return view("dashboard.finances.edit", ["obj" => $finance, "farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts, "finances"=>$finances ]);
     }
 
     /**
@@ -94,6 +112,7 @@ class FinanceController extends Controller
           $obj->farm_id = $request->farm_id;
           $obj->status = $request->status;
           $obj->contact_id = $request->contact_id;
+          $obj->parent_id = $request->parent_id;
 
           if ($files = $request->file('picture')){
               $fName = time().'.'.$request->picture->extension();

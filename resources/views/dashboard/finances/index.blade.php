@@ -37,7 +37,20 @@
 
 @section('content')
 
-<!-- finances List Table -->
+
+  <div class="mb-3">
+    <div class="btn-group" role="group" aria-label="Filter by type">
+      <a href="{{ url('finances') }}" class="btn btn-sm {{ !request('type') ? 'btn-primary' : 'btn-outline-primary' }}">All</a>
+      <a href="{{ url('finances?type=capital') }}" class="btn btn-sm {{ request('type') == 'capital' ? 'btn-info' : 'btn-outline-info' }}">Capital</a>
+      <a href="{{ url('finances?type=income') }}" class="btn btn-sm {{ request('type') == 'income' ? 'btn-success' : 'btn-outline-success' }}">Income</a>
+      <a href="{{ url('finances?type=expense') }}" class="btn btn-sm {{ request('type') == 'expense' ? 'btn-danger' : 'btn-outline-danger' }}">Expense</a>
+      <a href="{{ url('finances?type=debt') }}" class="btn btn-sm {{ request('type') == 'debt' ? 'btn-warning' : 'btn-outline-warning' }}">Debt</a>
+      <a href="{{ url('finances?type=loan') }}" class="btn btn-sm {{ request('type') == 'loan' ? 'btn-secondary' : 'btn-outline-secondary' }}">Loan</a>
+    </div>
+  </div>
+
+
+  <!-- finances List Table -->
 <div class="card">
   <div class="card-header border-bottom">
     <h5 class="card-title">Finances
@@ -46,7 +59,6 @@
                 class='add-new btn btn-primary float-end' >Add</a>
 
     </h5>
-
   </div>
 
 
@@ -64,6 +76,7 @@
         <th>Action</th>
         <th>Comment</th>
         <th>Contact</th>
+        <th>Parent/Capital</th>
         <th>Created At</th>
       </tr>
     </thead>
@@ -131,6 +144,11 @@
           <td class="text-nowrap">
             @isset($r->contact)
               {{$r->contact->name}}
+            @endisset
+          </td>
+          <td class="text-nowrap">
+            @isset($r->parent)
+              <a href="{{url("finances?parent_id=".$r->parent_id)}}" class="text-success">UGX <b>{{number_format($r->parent->amount)}}</b></a>
             @endisset
           </td>
           <td>

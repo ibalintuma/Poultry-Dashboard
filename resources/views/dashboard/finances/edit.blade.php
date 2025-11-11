@@ -67,7 +67,9 @@
           @csrf
           @method('PUT')
 
-<div class='mb-3'>
+          <div class="row">
+
+<div class='mb-3 col-6'>
   <label for="type" class="form-label">Type</label>
   <select class="form-select" name="type" id="type" required>
     <option value="">Select type</option>
@@ -162,6 +164,22 @@
     <option value="pending" {{ $obj->status == 'pending' ? 'selected' : '' }}>Pending</option>
   </select>
 </div>
+
+
+          <div class="mb-3 col-8">
+            <label for="exampleFormControlSelect1" class="form-label">Capital</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='parent_id'>
+              <option value=""> None / Empty</option>
+              @foreach($finances as $item)
+                <option value="{{$item->id}}"
+                        @if($obj->parent_id == $item->id) selected @endif
+                >UGX {{number_format($item->amount)}} | {{$item->name}} - {{$item->comment}} </option>
+              @endforeach
+            </select>
+          </div>
+
+          </div>
 
 
           <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>

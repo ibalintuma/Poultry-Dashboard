@@ -152,6 +152,18 @@
            <option value="pending">Pending</option>
          </select>
        </div>
+
+          <div class="mb-3 col-8">
+                    <label for="exampleFormControlSelect1" class="form-label">Capital</label>
+                    <select class="form-select" id="exampleFormControlSelect1"
+                            aria-label="Default select" name='parent_id'>
+                            <option value=""> None / Empty</option>
+                      @foreach($finances as $item)
+                        <option value="{{$item->id}}">UGX {{number_format($item->amount)}} | {{$item->name}} - {{$item->comment}} </option>
+                      @endforeach
+                    </select>
+                  </div>
+
         </div>
 
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
