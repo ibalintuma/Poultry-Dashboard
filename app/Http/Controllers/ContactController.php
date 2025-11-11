@@ -78,9 +78,9 @@ class ContactController extends Controller
                 $obj->address = $request->address;
                 $obj->status = $request->status;
 
-      $obj->email = $request->email;
-      $obj->enable_sms_notifications = $request->enable_sms_notifications ? true : false;
-      $obj->enable_email_notifications = $request->enable_email_notifications ? true : false;
+                $obj->email = $request->email;
+                $obj->enable_sms_notifications = $request->enable_sms_notifications ? true : false;
+                $obj->enable_email_notifications = $request->enable_email_notifications ? true : false;
 
                 $obj->save();
 
