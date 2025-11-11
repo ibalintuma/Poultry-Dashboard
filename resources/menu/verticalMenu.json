@@ -46,6 +46,12 @@
       "name": "Farms",
       "icon": "menu-icon tf-icons bx bx-barn",
       "slug": "app-farms"
+    },
+    {
+      "url": "contacts",
+      "name": "Contacts",
+      "icon": "menu-icon tf-icons bx bx-barn",
+      "slug": "app-contacts"
     }
   ]
 }
