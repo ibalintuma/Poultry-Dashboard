@@ -79,7 +79,7 @@
               @endforeach
             </select>
           </div>
-          <div class="mb-3 col-6">
+          <div class="mb-3 col-4">
             <label for="exampleFormControlSelect1" class="form-label">Flock</label>
             <select class="form-select" id="exampleFormControlSelect1"
                     aria-label="Default select" name='flock_id'>
@@ -91,8 +91,20 @@
           </div>
 
 
+          <div class="mb-3 col-4">
+            <label for="exampleFormControlSelect1" class="form-label">Contact</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='contact_id'>
+              <option value="">None / Empty</option>
+              @foreach($constacts as $item)
+                <option value="{{$item->id}}">{{$item->role}} | {{$item->name}}</option>
+              @endforeach
+            </select>
+          </div>
 
-          <div class='mb-3 col-6'>
+
+
+          <div class='mb-3 col-4'>
          <label for="type" class="form-label">Type</label>
          <select class="form-select" name="type" id="type" required>
            <option value="expense">Expense</option>

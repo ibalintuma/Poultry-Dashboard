@@ -115,8 +115,21 @@
   </select>
 </div>
 
+          <div class="mb-3 col-4">
+            <label for="exampleFormControlSelect1" class="form-label">Contact</label>
+            <select class="form-select" id="exampleFormControlSelect1"
+                    aria-label="Default select" name='contact_id'>
+              <option value="">None / Empty</option>
+              @foreach($constacts as $item)
+                <option value="{{$item->id}}"
+                        @if($obj->contact_id == $item->id) selected @endif
+                >{{$item->role}} | {{$item->name}}</option>
+              @endforeach
+            </select>
+          </div>
 
-<div class='mb-3'>
+
+          <div class='mb-3'>
   <label for="farm_id" class="form-label">Farm</label>
   <select class="form-select" name="farm_id" id="farm_id">
     <option value="">Select Farm</option>
