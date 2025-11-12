@@ -1165,6 +1165,7 @@
         <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
           <div class="d-flex justify-content-between align-content-center flex-wrap gap-4">
 
+
             <div class="d-flex align-items-center gap-2 mx-2">
               <div>
                 <div class="d-flex align-items-center">
@@ -1172,6 +1173,17 @@
                 </div>
                 <div class="d-flex align-items-center">
                   <span class="badge badge-dot bg-danger me-2"></span> Expenses Sofar
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0 me-2">{{ number_format($chicken_received_total - $chicken_out_total) }}</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="badge badge-dot bg-warning me-2"></span> Chicken
                 </div>
               </div>
             </div>
@@ -1190,7 +1202,7 @@
             <div class="d-flex align-items-center gap-2">
               <div>
                 <div class="d-flex align-items-center">
-                  <h6 class="mb-0 me-2">UGX {{ number_format(13000 * $chicken_received_total) }}</h6>
+                  <h6 class="mb-0 me-2">UGX {{ number_format(13000 * ($chicken_received_total - $chicken_out_total)) }}</h6>
                 </div>
                 <div class="d-flex align-items-center">
                   <span class="badge badge-dot bg-success me-2"></span> Expected Revenue
@@ -1201,7 +1213,7 @@
             <div class="d-flex align-items-center gap-2">
               <div>
                 <div class="d-flex align-items-center">
-                  <h6 class="mb-0 me-2">UGX {{ number_format( (13000 * $chicken_received_total) - $expenses_total  ) }}</h6>
+                  <h6 class="mb-0 me-2">UGX {{ number_format( (13000 * ($chicken_received_total - $chicken_out_total)) - $expenses_total  ) }}</h6>
                 </div>
                 <div class="d-flex align-items-center">
                   <span class="badge badge-dot bg-dark me-2"></span> Expected Profits
