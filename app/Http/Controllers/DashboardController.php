@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Finance;
 use Illuminate\Http\Request;
 
@@ -63,6 +64,30 @@ class DashboardController extends Controller
           return $item;
         });
 
+      $debtors = [];
+      $debt_amount_total = Finance::where("type","debt")->sum("amount");
+      $debt_amount_paid_total = Finance::where("type","debt")->where("status","cleared")->sum("amount");
+      $debt_amount_balance_total = $debt_amount_total - $debt_amount_paid_total;
+
+      $color_words = ["success","danger","warning","info","primary","secondary","dark","light"];
+      $contact_debtor_ids = Finance::where("type","debt")
+                                    ->whereNotNull("contact_id")
+                                    ->distinct("contact_id")
+                                    ->pluck('contact_id')
+                                    ->toArray();
+      foreach($contact_debtor_ids as $id){
+        $obj = new \stdClass();
+        $obj->id = $id;
+        $obj->color = $color_words[array_rand($color_words)];
+        $obj->contact = Contact::find($id);
+        $obj->total_debt = Finance::where("type","debt")->where("contact_id",$id)->sum("amount");
+        $obj->total_paid = Finance::where("type","debt")->where("contact_id",$id)->where("status","cleared")->sum("amount");
+        $obj->balance = $obj->total_debt - $obj->total_paid;
+        $obj->percentage = number_format(($obj->balance/$debt_amount_balance_total)*100,1);
+        $debtors[] = $obj;
+      }
+
+
         return view('dashboard.analytics.index',[
           "expenses_total" => \App\Models\Finance::where("type","expense")->sum('amount'),
 
@@ -81,9 +106,15 @@ class DashboardController extends Controller
           "chicken_out_gift_total" => \App\Models\FlockOut::where("type","gift")->sum('quantity'),
           "chicken_out_got_out_total" => \App\Models\FlockOut::where("type","got-out")->sum('quantity'),
 
-          "chicken_loss_data"=>$chicken_loss_data
+          "chicken_loss_data"=>$chicken_loss_data,
 
-          ,"calenders"=>$calenders
+          "calenders"=>$calenders,
+
+          "debtors"=>$debtors,
+          "debt_amount_total"=>$debt_amount_total,
+          "debt_amount_paid_total"=>$debt_amount_paid_total,
+          "debt_amount_balance_total"=>$debt_amount_balance_total
+
         ]);
     }
 }

@@ -1192,5 +1192,40 @@
   <!--/ Marketing Campaigns -->
 
 
+  <!-- All Users -->
+  <div class="col-md-6 col-lg-6 col-xl-4 mb-4 mb-xl-0">
+    <div class="card h-100">
+      <div class="card-header">
+        <h5 class="card-title mb-2">Total Debt</h5>
+        <h1 class="display-6 fw-normal mb-0">UGX {{number_format($debt_amount_balance_total)}}</h1>
+      </div>
+      <div class="card-body">
+        <span class="d-block mb-2">Current Activity</span>
+        <div class="progress progress-stacked mb-3 mb-xl-5" style="height:8px;">
+          @foreach($debtors as $debtor)
+          <div class="progress-bar bg-{{$debtor->color}}" role="progressbar" style="width: {{$debtor->percentage}}%" aria-valuenow="{{$debtor->percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+          @endforeach
+        </div>
+        <ul class="p-0 m-0">
+          @foreach($debtors as $debtor)
+            <li class="
+             @if($loop->last) mb-1 @else mb-3 @endif
+             d-flex justify-content-between">
+              <div class="d-flex align-items-center lh-1 me-3">
+                <span class="badge badge-dot bg-{{$debtor->color}} me-2"></span> {{ucfirst($debtor->contact->name)}}
+              </div>
+              <div class="d-flex gap-3">
+                <span>UGX {{number_format($debtor->balance)}}</span>
+                <span class="fw-semibold">{{$debtor->percentage}}%</span>
+              </div>
+            </li>
+          @endforeach
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ All Users -->
+
+
 </div>
 @endsection
