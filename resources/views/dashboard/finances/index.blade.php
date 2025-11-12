@@ -77,8 +77,8 @@
         <tr>
           <th>Date</th>
           <th>Type</th>
-          <th>Name</th>
           <th>Amount</th>
+          <th>Name</th>
           <th>Flock</th>
           <th>Farm</th>
           <th>Picture</th>
@@ -117,12 +117,12 @@
               @endif
             </td>
             <td>
+              <b>{{number_format($r->amount)}}</b>
+            </td>
+            <td>
               <div style="width: 300px">
                 {{$r->name}}
               </div>
-            </td>
-            <td>
-              <b>{{number_format($r->amount)}}</b>
             </td>
             <td>
             <span class="text-nowrap" >
