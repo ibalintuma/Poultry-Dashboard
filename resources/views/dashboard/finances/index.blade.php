@@ -72,7 +72,7 @@
 
 
     <div class="card-datatable table-responsive">
-      <table class="datatables-users table border-top">
+      <table class="datatables-users table border-top table-hover ">
         <thead>
         <tr>
           <th>Date</th>
