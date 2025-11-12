@@ -1101,8 +1101,8 @@
               </div>
               <div class="d-flex flex-column w-100">
                 <div class="d-flex justify-content-between mb-1">
-                  <span>Total {{strtoupper($ft["type"])}}</span>
-                  <span class="text-muted">UGX {{number_format($ft["amount"])}}</span>
+                  <span>Total <b>{{strtoupper($ft["type"])}}</b></span>
+                  <span class="text-muted">UGX <b>{{number_format($ft["amount"])}}</b></span>
                 </div>
                 <div class="progress" style="height:6px;">
                   <div class="progress-bar bg-primary" style="width: 40%" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
@@ -1134,6 +1134,107 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="col-xl-12 mb-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">Profitability</h5>
+      </div>
+      <div class="card-body">
+        <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+          <div class="d-flex justify-content-between align-content-center flex-wrap gap-4">
+
+            <div class="d-flex align-items-center gap-2 mx-2">
+              <div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0 me-2">UGX {{ number_format($expenses_total) }}</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="badge badge-dot bg-danger me-2"></span> Expenses Sofar
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0 me-2">@ UGX {{ number_format(13000) }}</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="badge badge-dot bg-info me-2"></span> Selling Price
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0 me-2">UGX {{ number_format(13000 * $chicken_received_total) }}</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="badge badge-dot bg-success me-2"></span> Expected Revenue
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+              <div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0 me-2">UGX {{ number_format( (13000 * $chicken_received_total) - $expenses_total  ) }}</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="badge badge-dot bg-dark me-2"></span> Expected Profits
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   <div class="col-lg-6 col-md-12 mb-4">
     <div class="card">
