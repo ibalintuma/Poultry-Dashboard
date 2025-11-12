@@ -116,7 +116,11 @@
                 <span class="small">{{$r->status}}</span>
               @endif
             </td>
-            <td>{{$r->name}}</td>
+            <td>
+              <div style="width: 300px">
+                {{$r->name}}
+              </div>
+            </td>
             <td>
               <b>{{number_format($r->amount)}}</b>
             </td>
