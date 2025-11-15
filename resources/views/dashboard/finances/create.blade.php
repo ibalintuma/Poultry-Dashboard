@@ -80,7 +80,7 @@
             </select>
           </div>
           <div class="mb-3 col-6">
-            <label for="exampleFormControlSelect1" class="form-label">Flock</label>
+            <label for="exampleFormControlSelect1" class="form-label">Batch</label>
             <select class="form-select" id="exampleFormControlSelect1"
                     aria-label="Default select" name='flock_id'>
               @foreach($flocks as $item)
@@ -163,6 +163,25 @@
                       @endforeach
                     </select>
                   </div>
+
+          <div class='mb-3 col-4'>
+            <label for="category_id" class="form-label">Category</label>
+            <select class="form-select" name="category" id="category">
+              <option value="">Select Category</option>
+              @foreach($categories as $category)
+                <option value="{{ $category }}">{{ $category }}</option>
+              @endforeach
+            </select>
+          </div>
+
+          <div class='mb-3 col-4'>
+            <label for="affects_profits" class="form-label">Affects Profits</label>
+            <select class="form-select" name="affects_profits" id="affects_profits">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
+          </div>
+
 
         </div>
 

@@ -7,15 +7,21 @@
       "slug": "app-dashboard"
     },{
       "url": "flocks",
-      "name": "Flocks",
+      "name": "Batches",
       "icon": "menu-icon tf-icons bx bx-group",
       "slug": "app-flocks"
     },
     {
       "url": "flock_outs",
-      "name": "Flock Out",
+      "name": "Batches Out",
       "icon": "menu-icon tf-icons bx bx-exit",
       "slug": "app-flock_outs"
+    },
+    {
+      "url": "flock_weights",
+      "name": "Batch Weights",
+      "icon": "menu-icon tf-icons bx bx-exit",
+      "slug": "app-flock_weights"
     },
     {
       "url": "finances",

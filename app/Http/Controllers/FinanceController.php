@@ -42,11 +42,12 @@ class FinanceController extends Controller
      */
     public function create()
     {
+      $categories = ['General',"Feeding","Treatment",'Building',"Labor","Transport", 'Operational','Emergency','Miscellaneous'];
       $farms = \App\Models\Farm::all();
       $flocks = \App\Models\Flock::all();
       $contacts = \App\Models\Contact::all();
       $finances = \App\Models\Finance::where("type","capital")->orderBy("id","desc")->get();
-        return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts, "finances"=>$finances]);
+        return view("dashboard.finances.create",["farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts, "finances"=>$finances, "categories"=>$categories]);
     }
 
     /**
@@ -65,6 +66,12 @@ class FinanceController extends Controller
                           $obj->farm_id = $request->farm_id;
                           $obj->contact_id = $request->contact_id;
                           $obj->parent_id = $request->parent_id;
+
+                          //category, affects_profits
+                          $obj->category = $request->category;
+                          $obj->affects_profits = $request->affects_profits;
+                          $obj->status = $request->status;
+
 
                           if ($files = $request->file('picture')){
                               $fName = time().'.'.$request->picture->extension();
@@ -90,11 +97,12 @@ class FinanceController extends Controller
      */
     public function edit(Finance $finance)
     {
+      $categories = ['General',"Feeding","Treatment",'Building',"Labor","Transport", 'Operational','Emergency','Miscellaneous'];
         $farms = \App\Models\Farm::all();
         $flocks = \App\Models\Flock::all();
         $contacts = \App\Models\Contact::all();
       $finances = \App\Models\Finance::where("type","capital")->orderBy("id","desc")->get();
-        return view("dashboard.finances.edit", ["obj" => $finance, "farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts, "finances"=>$finances ]);
+        return view("dashboard.finances.edit", ["obj" => $finance, "farms"=>$farms,"flocks"=>$flocks, "contacts"=>$contacts, "finances"=>$finances, "categories"=>$categories ]);
     }
 
     /**
@@ -113,6 +121,9 @@ class FinanceController extends Controller
           $obj->status = $request->status;
           $obj->contact_id = $request->contact_id;
           $obj->parent_id = $request->parent_id;
+
+          $obj->category = $request->category;
+          $obj->affects_profits = $request->affects_profits;
 
           if ($files = $request->file('picture')){
               $fName = time().'.'.$request->picture->extension();

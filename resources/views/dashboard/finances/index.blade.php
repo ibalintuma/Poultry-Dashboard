@@ -76,10 +76,11 @@
         <thead>
         <tr>
           <th>Date</th>
+          <th>PROFIT</th>
           <th>Type</th>
           <th>Amount</th>
           <th>Name</th>
-          <th>Flock</th>
+          <th>Batch</th>
           <th>Farm</th>
           <th>Picture</th>
           <th>Action</th>
@@ -104,6 +105,15 @@
             </span>
             </td>
             <td>
+              @if( $r->type == "expense")
+                @if($r->affects_profits == 0)
+                  <img style="width:20px;height:20px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABUElEQVR4nO2XXU7DMBCEc5LavgHcgvDSF1Af4BJwFWA3N8LrQxSprbhEKxUliEJFQvyzqRDMJ1lRlGQ8o6ydTVUBAAAAAADwrzHPfGmFXqzwfmwYobUJVFe/CSu0iTF/COF5pTa5CXRupLlvj9kaQuuUAO1QMW9DszDC2/dXy9v2PCtAoNoKLU8awAldf5j/HLRz4em2WLwa0lcK8LN4eQg3Yr4owNeyGd4p8svJ9uj3zadmvj03Qg+9kyaGsEPmQ7MoDjBU8zPhm+6656uSNeFG9IsCjIkf7ssM4SL0swPEms8N4SL1swKkmk8N4RL0j1sNWhYtqJjwY8+n6ptAddcHdaO5mNT8qXYt1bJJK6fvH79Zpv6k5uNCkI5563k+2WtVLMvollZVXLl77cV6ep3S/NH/g+c7I49nqsJdCXledX2557mqOAAAAAAAAH+SNx/iPCmQuQXjAAAAAElFTkSuQmCC" alt="chart-arrow-rise">
+                @else
+                  <img style="width:20px;height:20px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABQUlEQVR4nO2WW07DMBBFzY5gF8AH9b0B8UE3AVthfyBB+eCxAI+D1MpIrYDi4Cct0hwpyk9yZ45fiTGKoiiKoiiKsnMEuBDyzZNPjrTmP7E05kDIV08uwyXkKORlj1oyDEeevAl30zSYfF4L9JIIeSG3S76zluvwHhKfm+82SA443yoCvMswzBvsry+5LfO7Skw173tJtJruaA5w2305SaXEb+/n5jvSCvASDhsHnHWVSH1PMvLD92nzHLBIEijZEz+t+Y/ngauafP9t3yQL5BTJbT4nv0ogpUhp86n51QJ/carIxJ5oIhArsnWuVxyJEpFoJhCb7pJlU5LfRCBWpEXzqRJmn/4uR/LUk/dTI95FYPN/D1zLbHZYmuGBRU7zTQVa4MnHTIEHs0+M1p544C61+RE43nXPiqIoiqIoimLMCp+oZkX1xdcLAAAAAElFTkSuQmCC" alt="chart-arrow-descent">
+                @endif
+              @endif
+            </td>
+            <td>
             <span class="badge
             @if($r->type == "capital") bg-info
             @elseif($r->type == "income") bg-success
@@ -122,6 +132,9 @@
             <td>
               <div style="width: 300px">
                 {{$r->name}}
+                @if( $r->category != "" && $r->category != null && $r->category != "general")
+                  <span class="fw-bold" > ({{ucfirst($r->category)}})</span>
+                @endif
               </div>
             </td>
             <td>

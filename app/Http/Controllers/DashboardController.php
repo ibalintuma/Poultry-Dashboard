@@ -90,6 +90,8 @@ class DashboardController extends Controller
 
         return view('dashboard.analytics.index',[
           "expenses_total" => \App\Models\Finance::where("type","expense")->sum('amount'),
+          "expenses_affecting_profits_total" => \App\Models\Finance::where("type","expense")->where("affects_profits",true)
+            ->sum('amount'),
 
           "debt_total" => \App\Models\Finance::where("type","debt")->sum('amount'),
           "debt_paid_total" => \App\Models\Finance::where("type","debt")->where("status","cleared")->sum('amount'),

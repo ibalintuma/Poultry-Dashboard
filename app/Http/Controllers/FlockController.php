@@ -17,9 +17,19 @@ class FlockController extends Controller
     {
         return view("dashboard.flocks.index",[
             "list"=>Flock::orderBy("name","asc")->get()->map(function($item){
+                $last_weight_date = date("Y-m-d");
+                $last_weight_obj = \App\Models\FlockWeight::where("flock_id",$item->id)->orderBy("date","desc")->first();
+                if($last_weight_obj){
+                  $last_weight_date = $last_weight_obj->date;
+                }
+
+
                 $item->farm = Farm::find($item->farm_id);
                 $item->quantity_out = \App\Models\FlockOut::where("flock_id",$item->id)->sum("quantity");
                 $item->quantity_current = $item->quantity - $item->quantity_out;
+                $item->average_weight = \App\Models\FlockWeight::where("flock_id",$item->id)
+                  ->whereDate("date",$last_weight_date)
+                  ->avg("weight");
                 return $item;
             })
           ]);

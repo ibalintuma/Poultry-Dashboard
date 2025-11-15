@@ -1,6 +1,6 @@
 <@extends('layouts/layoutMaster')
 
-@section('title', 'flock_outs')
+@section('title', 'Batches Out')
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -57,7 +57,7 @@
     <!-- Offcanvas to add new user -->
     <div class="" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
       <div class="offcanvas-header border-bottom">
-        <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Edit Flock Outs</h6>
+        <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Edit Batches Out</h6>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body mx-0 flex-grow-0">

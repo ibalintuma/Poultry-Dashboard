@@ -1,6 +1,6 @@
 <@extends('layouts/layoutMaster')
 
-@section('title', 'Batches')
+@section('title', 'Flock Weights')
 
 @section('vendor-style')
   <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -57,98 +57,61 @@
     <!-- Offcanvas to add new user -->
     <div class="" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
       <div class="offcanvas-header border-bottom">
-        <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Edit Batches</h6>
+        <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Edit Flock Weight</h6>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body mx-0 flex-grow-0">
 
-        <form action='{{route("flocks.update", $obj->id)}}' method='post' enctype='multipart/form-data'>
+        <form action='{{route("flock_weights.update", $obj->id)}}' method='post' enctype='multipart/form-data'>
 
           @csrf
           @method('PUT')
 
 
-          <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">name</label>
-            <input type="text" class="form-control"
-                   name='name'
-                   value='{{ $obj->name }}'
-                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
-          </div>
-
-
+          <div class="row">
 
           <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">quantity</label>
-            <input type="number" class="form-control"
-                   name='quantity'
-                    value='{{ $obj->quantity }}'
-                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
-          </div>
-
-          <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">farm</label>
-            <select name='farm_id' class='form-control'>
-              @foreach($farms as $f)
+            <label for="defaultFormControlInput" class="form-label">flock</label>
+            <select class="form-select" name='flock_id' aria-label="Default select example">
+              <option selected>Open this select menu</option>
+              @foreach($flocks as $f)
                 <option value='{{$f->id}}'
-                  @if($f->id == $obj->farm_id) selected @endif
+                  @if($obj->flock_id == $f->id) selected @endif
                 >{{$f->name}}</option>
               @endforeach
             </select>
           </div>
 
-          <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">type</label>
-            <input type="text" class="form-control"
-                   name='type'
-                    value='{{ $obj->type }}'
-                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
-          </div>
-
-          <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">picture</label>
-            <input type="file" class="form-control"
-                   name='picture'
-                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
-          </div>
-
-
-          <div class='mb-3'>
+          <div class='mb-3 col-6'>
             <label for="defaultFormControlInput" class="form-label">date</label>
             <input type="date" class="form-control"
                    name='date'
-                   value="{{$obj->date}}"
+                    value='{{$obj->date}}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+          <div class='mb-3 col-6'>
+            <label for="defaultFormControlInput" class="form-label">Weight in KGs </label>
+            <input type="number" class="form-control"
+                   name='weight'
+                   step="0.0001"
+                    value='{{$obj->weight}}'
                    id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
           </div>
 
 
           <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">seller</label>
+            <label for="defaultFormControlInput" class="form-label">comment</label>
             <input type="text" class="form-control"
-                   name='seller'
-                    value='{{ $obj->seller }}'
+                   name='comment'
+                    value='{{$obj->comment}}'
                    id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
           </div>
 
-          <div class='mb-3'>
-            <label for="defaultFormControlInput" class="form-label">status</label>
-            <select name='status' class='form-control'>
-              @foreach($statuses as $s)
-                <option value='{{$s}}'
-                  @if($s == $obj->status) selected @endif
-                >{{$s}}</option>
-              @endforeach
-            </select>
           </div>
 
-          <div class='mb-3'>
-                      <label for="defaultFormControlInput" class="form-label">comment</label>
-                      <input type="text" class="form-control"
-                             name='comment'
-                             value='{{ $obj->comment }}'
-                             id="defaultFormControlInput"
-                             aria-describedby="defaultFormControlHelp" />
-                    </div>
+          <input type="hidden" name="previous_url" value="{{url()->previous()}}"/>
+
 
           <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
           <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>
@@ -158,4 +121,3 @@
     </div>
   </div>
 @endsection
->

@@ -1177,6 +1177,19 @@
               </div>
             </div>
 
+            @if( $expenses_total != $expenses_affecting_profits_total )
+            <div class="d-flex align-items-center gap-2 mx-2">
+              <div>
+                <div class="d-flex align-items-center">
+                  <h6 class="mb-0 me-2">UGX {{ number_format($expenses_affecting_profits_total) }}</h6>
+                </div>
+                <div class="d-flex align-items-center">
+                  <span class="badge badge-dot bg-danger me-2"></span> Expenses Affecting Profits
+                </div>
+              </div>
+            </div>
+            @endif
+
             <div class="d-flex align-items-center gap-2">
               <div>
                 <div class="d-flex align-items-center">
@@ -1213,7 +1226,7 @@
             <div class="d-flex align-items-center gap-2">
               <div>
                 <div class="d-flex align-items-center">
-                  <h6 class="mb-0 me-2">UGX {{ number_format( (13000 * ($chicken_received_total - $chicken_out_total)) - $expenses_total  ) }}</h6>
+                  <h6 class="mb-0 me-2">UGX {{ number_format( (13000 * ($chicken_received_total - $chicken_out_total)) - $expenses_affecting_profits_total  ) }}</h6>
                 </div>
                 <div class="d-flex align-items-center">
                   <span class="badge badge-dot bg-dark me-2"></span> Expected Profits

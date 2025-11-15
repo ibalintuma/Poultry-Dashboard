@@ -197,6 +197,7 @@ Route::resource('/user-list', UserManagement::class);
 Route::resource("farms", App\Http\Controllers\FarmController::class);
 Route::resource("flocks", App\Http\Controllers\FlockController::class);
 Route::resource("flock_outs", App\Http\Controllers\FlockOutController::class);
+Route::resource("flock_weights", App\Http\Controllers\FlockWeightController::class);
 Route::resource("finances", App\Http\Controllers\FinanceController::class);
 Route::resource("stocks", App\Http\Controllers\StockController::class);
 Route::resource("stock_transfers", App\Http\Controllers\StockTransferController::class);

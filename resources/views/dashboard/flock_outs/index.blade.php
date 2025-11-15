@@ -1,6 +1,6 @@
 <@extends('layouts/layoutMaster')
 
-@section('title', 'flock_outs')
+@section('title', 'Batches Out')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -40,7 +40,7 @@
 <!-- flock_outs List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title">Flock Out
+    <h5 class="card-title">Batches Out
 
         <a href='{{url("flock_outs/create?flock_id=".$flock_id)}}'
                 class='add-new btn btn-primary float-end' >Add</a>

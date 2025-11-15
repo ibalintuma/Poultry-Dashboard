@@ -1,6 +1,6 @@
 <@extends('layouts/layoutMaster')
 
-@section('title', 'Batch Out')
+@section('title', 'Flock Weights')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -57,12 +57,12 @@
   <!-- Offcanvas to add new user -->
   <div class="" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
     <div class="offcanvas-header border-bottom">
-      <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Add Batches Out</h6>
+      <h6 id="offcanvasAddUserLabel" class="offcanvas-title">Add Flock Weigh</h6>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body mx-0 flex-grow-0">
 
-      <form action='{{url("flock_outs")}}' method='post' enctype='multipart/form-data'>
+      <form action='{{url("flock_weights")}}' method='post' enctype='multipart/form-data'>
 
         @csrf
 
@@ -79,40 +79,24 @@
         </div>
 
 
-
-        <div class='mb-3 col-6'>
-          <label for="type" class="form-label">Type</label>
-          <select class="form-select" name="type" id="type" required>
-            <option value="died">Died</option>
-            <option value="sold">Sold</option>
-            <option value="got-out">Got Out</option>
-            <option value="gift">Gift</option>
-          </select>
-        </div>
-
         <div class='mb-3 col-6'>
           <label for="defaultFormControlInput" class="form-label">date</label>
           <input type="date" class="form-control"
                  name='date'
+                 value='{{date("Y-m-d")}}'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
-        <div class='mb-3'>
-          <label for="defaultFormControlInput" class="form-label">quantity</label>
+        <div class='mb-3 col-6'>
+          <label for="defaultFormControlInput" class="form-label">Weight in KGs</label>
           <input type="number" class="form-control"
-                 name='quantity'
+                 name='weight'
+                 step="0.0001"
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
         </div>
 
-        <div class='mb-3 col-6'>
-          <label for="defaultFormControlInput" class="form-label">reason</label>
-          <input type="text" class="form-control"
-                 name='reason'
-                 id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
-        </div>
-
-        <div class='mb-3 col-6'>
-          <label for="defaultFormControlInput" class="form-label">comment</label>
+        <div class='mb-3 col-12'>
+          <label for="defaultFormControlInput" class="form-label">Comment</label>
           <input type="text" class="form-control"
                  name='comment'
                  id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />

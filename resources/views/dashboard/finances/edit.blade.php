@@ -106,7 +106,7 @@
 
 
 <div class='mb-3'>
-  <label for="flock_id" class="form-label">Flock</label>
+  <label for="flock_id" class="form-label">Batch</label>
   <select class="form-select" name="flock_id" id="flock_id">
     <option value="">None / Empty</option>
     @foreach($flocks as $flock)
@@ -178,6 +178,28 @@
               @endforeach
             </select>
           </div>
+
+
+            <div class='mb-3 col-4'>
+              <label for="category_id" class="form-label">Category</label>
+              <select class="form-select" name="category" id="category">
+                <option value="">Select Category</option>
+                @foreach($categories as $category)
+                  <option value="{{ $category }}"
+                    {{ $obj->category_id == $category ? 'selected' : '' }}
+                  >{{ $category }}</option>
+                @endforeach
+              </select>
+            </div>
+
+            <div class='mb-3 col-4'>
+              <label for="affects_profits" class="form-label">Affects Profits</label>
+              <select class="form-select" name="affects_profits" id="affects_profits">
+                <option value="1" {{ $obj->affects_profits ? 'selected' : '' }}>Yes</option>
+                <option value="0" {{ !$obj->affects_profits ? 'selected' : '' }}>No</option>
+              </select>
+            </div>
+
 
           </div>
 

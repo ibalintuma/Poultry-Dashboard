@@ -1,6 +1,6 @@
-@extends('layouts/layoutMaster')
+<@extends('layouts/layoutMaster')
 
-@section('title', 'Batches')
+@section('title', 'Batch Weights')
 
 @section('vendor-style')
 <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}">
@@ -37,12 +37,12 @@
 
 @section('content')
 
-<!-- Batches List Table -->
+<!-- flock_outs List Table -->
 <div class="card">
   <div class="card-header border-bottom">
-    <h5 class="card-title">Batches
+    <h5 class="card-title">Batch Weights
 
-        <a href='{{url("flocks/create")}}'
+        <a href='{{url("flock_weights/create?flock_id=".$flock_id)}}'
                 class='add-new btn btn-primary float-end' >Add</a>
 
     </h5>
@@ -50,100 +50,44 @@
   </div>
 
 
+
   <div class="card-datatable table-responsive">
     <table class="datatables-users table border-top">
       <thead>
+
         <tr>
-          <th>Name</th>
-          <th>qty now</th>
-          <th>date brought</th>
-          <th>farm</th>
-          <th>type</th>
+          <th>date</th>
+          <th>flock</th>
+          <th>Weight</th>
+          <th>Comment</th>
           <th>Action</th>
-          <th>qty Initial</th>
-          <th>qty Lost</th>
-          <th>Avg. Weight</th>
-          <th>seller</th>
-          <th>status</th>
           <th>comment</th>
         </tr>
       </thead>
 
       @foreach($list as $r)
 
-        <tr class="
-        @if($r->status == "ongoing")
-        bg-label-success text-dark
-        @endif
-        ">
+        <tr>
           <td>
-            <span class="text-nowrap" >
-            {{$r->name}}
-            </span>
-          </td>
-          <td>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-              <span class="m-1">
-                <b>{{$r->quantity_current}}</b>
-              </span>
-              <a href="{{url("flock_outs/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >-</a>
-            </div>
-          </td>
-          <td>
-            <span class="text-nowrap" >
             {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
-              @if( $r->status == "ongoing")
-                <span class="text-muted">({{ \Carbon\Carbon::parse($r->date)->diffInDays()|round(0, PHP_ROUND_HALF_DOWN) }} days ago)</span>
-              @endif
-            </span>
           </td>
-          <td>
-            <span class="text-nowrap" >
-            {{$r->farm->name}}
-            </span>
-          </td>
-          <td>{{$r->type}}</td>
+          <td>{{$r->flock->name}}</td>
+          <td>{{$r->weight}} Kg</td>
+          <td>{{$r->comment}}</td>
           <td>
             <div class="row w-100">
-              @include("dashboard.components.pato_edit",[ "route" => "flocks.edit","id" => $r->id])
-              @include("dashboard.components.pato_delete",[ "route" => "flocks.destroy","id" => $r->id])
+              @include("dashboard.components.pato_edit",[ "route" => "flock_weights.edit","id" => $r->id])
+              @include("dashboard.components.pato_delete",[ "route" => "flock_weights.destroy","id" => $r->id])
             </div>
           </td>
-          <td>{{$r->quantity}}</td>
-          <td>
-            <div class="d-flex flex-row justify-content-center align-items-center">
-              <a href="{{url("flock_outs?flock_id=".$r->id)}}">
-              {{$r->quantity_out}}
-              </a>
-            </div>
-          </td>
-          <td class="text-nowrap">
-            @if($r->average_weight != null)
-            {{number_format($r->average_weight,3)}}
-            @else
-              ?
-            @endif
-              Kg
-            <a href="{{url("flock_weights/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >+</a>
-          </td>
-          <td>{{$r->seller}}</td>
-          <td>
-            <span class="badge bg-dark text-white">
-              {{$r->status}}
-            </span>
-          </td>
-          <td>
-            <div class="text-wrap" style="width: 300px;">
-              {{$r->comment}}
-            </div>
-          </td>
+          <td>{{$r->comment}}</td>
 
         </tr>
 
       @endforeach
     </table>
   </div>
-  <!-- Offcanvas to add new flocks -->
+  <!-- Offcanvas to add new flock_weights -->
 
 </div>
 @endsection
