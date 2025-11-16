@@ -80,13 +80,13 @@
             {{ \Carbon\Carbon::parse($r->date)->format('M d, Y') }}
           </td>
           <td>{{$r->type}}</td>
-          <td>{{$r->title}}</td>
+          <td class="text-nowrap">{{$r->title}}</td>
           <td>
             <div style="width: 300px;">
               {{$r->description}}
             </div>
           </td>
-          <td>UGX {{number_format($r->amount)}}</td>
+          <td class="text-nowrap">UGX {{number_format($r->amount)}}</td>
           <td>
             <div style="width: 300px;">
             {{$r->comment}}
@@ -96,7 +96,7 @@
             <span class="badge bg-dark text-white">{{$r->status}}</span>
           </td>
           <td>{{$r->priority}}</td>
-          <td>
+          <td class="text-nowrap">
           @isset( $r->contact )
             {{$r->contact->name}}
           @endisset
