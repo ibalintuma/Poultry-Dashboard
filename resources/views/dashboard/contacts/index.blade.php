@@ -74,13 +74,17 @@
 
         <tr>
           <td>{{$r->id}}</td>
-          <td>{{$r->name}}</td>
+          <td class="text-nowrap">{{$r->name}}</td>
           <td>{{$r->phone}}</td>
-          <td>{{$r->role}}</td>
-          <td>{{$r->type}}</td>
+          <td class="text-nowrap"><b>{{strtoupper($r->role)}}</b></td>
+          <td class="text-nowrap">{{$r->type}}</td>
           <td>{{$r->comment}}</td>
           <td>{{$r->address}}</td>
-          <td>{{$r->status}}</td>
+          <td>
+            <span class="badge bg-label-success">
+              {{$r->status}}
+            </span>
+          </td>
           <td>{{$r->email}}</td>
           <td>{{$r->enable_email_notifications == 1 ? "Yes" : "No" }}</td>
           <td>{{$r->enable_sms_notifications == 1 ? "Yes" : "No" }}</td>
