@@ -142,15 +142,6 @@ $customizerHidden = 'customizer-hide';
             </a>
           </p>
 
-          <div class="divider my-4">
-            <div class="divider-text">or</div>
-          </div>
-
-          <div class="d-flex justify-content-center">
-            <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
-              <i class="tf-icons bx bxl-google-plus"></i>
-            </a>
-          </div>
         </div>
       </div>
       <!-- /Register -->

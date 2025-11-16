@@ -1040,7 +1040,7 @@
   <div class="col-lg-3 col-md-12">
     <div class="row">
       <!-- Referral Chart-->
-      <div class="col-12  mb-4">
+      <div class="col-md-12 col-6  mb-4">
         <div class="card h-100">
           <div class="card-body text-center">
             <span class="d-block text-nowrap">Total Expense</span>
@@ -1048,7 +1048,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12  mb-4">
+      <div class="col-md-12 col-6   mb-4">
         <div class="card h-100">
           <div class="card-body text-center">
             <span class="d-block text-nowrap">Debt Pending</span>
@@ -1057,7 +1057,7 @@
         </div>
       </div>
 
-      <div class="col-12  mb-4">
+      <div class="col-md-12 col-6   mb-4">
         <div class="card h-100">
           <div class="card-body text-center">
 
@@ -1067,7 +1067,7 @@
         </div>
       </div>
 
-      <div class="col-12  mb-4">
+      <div class="col-md-12 col-6   mb-4">
         <div class="card h-100">
           <div class="card-body text-center">
 
@@ -1278,7 +1278,7 @@
 
 
   <!-- Marketing Campaigns -->
-  <div class="col-xl-8">
+  <div class="col-xl-8 mb-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="card-title mb-0">Calenders | Task Scheduler | Event</h5>
@@ -1306,7 +1306,7 @@
                     {{$calender->description}}
                   </div>
                 </td>
-                <td><span>UGX {{number_format($calender->amount)}}</span></td>
+                <td class="text-nowrap"><span>UGX {{number_format($calender->amount)}}</span></td>
                 <td class="text-nowrap"><span class="badge bg-label-dark">{{$calender->status}}</span></td>
               </tr>
             @endforeach

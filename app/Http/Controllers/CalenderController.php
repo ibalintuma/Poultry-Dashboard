@@ -12,8 +12,9 @@ class CalenderController extends Controller
      */
     public function index()
     {
+        $builder = Calender::orderBy("date","desc");
         return view("dashboard.calenders.index",[
-                "list"=>Calender::all()->map(function($item){
+                "list"=>$builder->get()->map(function($item){
                     $item->contact = \App\Models\Contact::find($item->contact_id);
                     return $item;
                 })
