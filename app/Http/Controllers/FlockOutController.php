@@ -13,11 +13,16 @@ class FlockOutController extends Controller
     public function index(Request $request)
     {
       $flock_id = $request->input("flock_id");
+      $type = $request->input("type");
 
       $builder = FlockOut::query();
       if($flock_id){
           $builder->where("flock_id",$flock_id);
       }
+      if($type){
+          $builder->where("type",$type);
+      }
+
 
         return view("dashboard.flock_outs.index",[
                 "list"=>$builder->orderBy("date","desc")->get()->map(function($item){

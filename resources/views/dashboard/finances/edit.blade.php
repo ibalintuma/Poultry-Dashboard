@@ -76,6 +76,7 @@
     <option value="income" {{ $obj->type == 'income' ? 'selected' : '' }}>Income</option>
     <option value="expense" {{ $obj->type == 'expense' ? 'selected' : '' }}>Expense</option>
     <option value="debt" {{ $obj->type == 'debt' ? 'selected' : '' }}>Debt</option>
+    <option value="debt-payment" {{  $obj->type == 'debt-payment' ? 'selected' : ''  }} >Debt-Payment</option>
     <option value="loan" {{ $obj->type == 'loan' ? 'selected' : '' }}>Loan</option>
     <option value="capital" {{ $obj->type == 'capital' ? 'selected' : '' }}>Capital</option>
   </select>

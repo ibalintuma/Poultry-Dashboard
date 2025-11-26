@@ -76,28 +76,26 @@
         <thead>
         <tr>
           <th>Date</th>
-          <th>PROFIT</th>
+          <th title="Affects Profits" >A.P</th>
           <th>Type</th>
           <th>Amount</th>
           <th>Name</th>
-          <th>Batch</th>
-          <th>Farm</th>
           <th>Picture</th>
           <th>Action</th>
           <th>Comment</th>
           <th>Contact</th>
           <th>Parent/Capital</th>
+
+          <th>Batch</th>
+          <th>Farm</th>
+
           <th>Created At</th>
         </tr>
         </thead>
         <tbody>
         @foreach($list as $r)
           <tr
-            class="
-        @if( $r->type == "debt" && $r->status == "pending")
-          bg-label-danger text-dark
-        @endif
-        "
+            class=" "
           >
             <td>
             <span class="text-nowrap" >
@@ -119,12 +117,10 @@
             @elseif($r->type == "income") bg-success
             @elseif($r->type == "expense") bg-danger
             @elseif($r->type == "debt") bg-warning
+            @elseif($r->type == "debt-payment") bg-gray
             @elseif($r->type == "loan") bg-secondary
             @endif
              text-white">{{$r->type}}</span>
-              @if($r->type == "debt" || $r->type == "loan")
-                <span class="small">{{$r->status}}</span>
-              @endif
             </td>
             <td>
               <b>{{number_format($r->amount)}}</b>
@@ -136,20 +132,6 @@
                   <span class="fw-bold" > ({{ucfirst($r->category)}})</span>
                 @endif
               </div>
-            </td>
-            <td>
-            <span class="text-nowrap" >
-            @isset($r->flock)
-                {{$r->flock->name}}
-              @endisset
-            </span>
-            </td>
-            <td>
-            <span class="text-nowrap" >
-            @isset($r->farm)
-                {{$r->farm->name}}
-              @endisset
-            </span>
             </td>
             <td>
               @if($r->picture)
@@ -176,6 +158,20 @@
               @isset($r->parent)
                 <a href="{{url("finances?parent_id=".$r->parent_id)}}" class="text-success">UGX <b>{{number_format($r->parent->amount)}}</b></a>
               @endisset
+            </td>
+            <td>
+            <span class="text-nowrap" >
+            @isset($r->flock)
+                {{$r->flock->name}}
+              @endisset
+            </span>
+            </td>
+            <td>
+            <span class="text-nowrap" >
+            @isset($r->farm)
+                {{$r->farm->name}}
+              @endisset
+            </span>
             </td>
             <td>
             <span class="text-nowrap" >

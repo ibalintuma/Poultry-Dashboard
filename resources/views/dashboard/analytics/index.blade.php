@@ -1052,7 +1052,7 @@
         <div class="card h-100">
           <div class="card-body text-center">
             <span class="d-block text-nowrap">Debt Pending</span>
-            <h5 class="mb-0 text-danger">UGX {{number_format($debt_total - $debt_paid_total)}}</h5>
+            <h5 class="mb-0 text-danger">UGX {{number_format($debt_amount_balance_total)}}</h5>
           </div>
         </div>
       </div>
@@ -1129,7 +1129,7 @@
   <div class="col-md-4 col-12 mb-4">
     <div class="card">
       <div class="card-body text-center">
-        <h4>💰UGX {{number_format($debt_total)}} Financial Debt</h4>
+        <h4>💰UGX {{number_format($debt_amount_balance_total)}} Financial Debt</h4>
         <div id="chartFinancialDebt"></div>
       </div>
     </div>

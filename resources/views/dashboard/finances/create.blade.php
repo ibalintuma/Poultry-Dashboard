@@ -70,7 +70,9 @@
 
 
 
-          <div class="mb-3 col-6">
+          <div class="mb-3 col-6
+          @if( count($farms) == 1 ) d-none @endif
+          ">
             <label for="exampleFormControlSelect1" class="form-label">Farm</label>
             <select class="form-select" id="exampleFormControlSelect1"
                     aria-label="Default select" name='farm_id'>
@@ -99,6 +101,7 @@
            <option value="expense">Expense</option>
            <option value="income">Income</option>
            <option value="debt">Debt</option>
+           <option value="debt-payment">Debt-Payment</option>
            <option value="loan">Loan</option>
            <option value="capital">Capital</option>
          </select>
@@ -117,24 +120,24 @@
          <input type="text" class="form-control" name="name" id="name" required />
        </div>
 
-       <div class='mb-3 col-6'>
+       <div class='mb-3 col-9'>
          <label for="amount" class="form-label">Amount</label>
          <input type="number" class="form-control" name="amount" id="amount" step="0.01" required />
        </div>
 
+          <div class='mb-3 col-3'>
+            <label for="picture" class="form-label">Picture</label>
+            <input type="file" class="form-control" name="picture" id="picture" accept="image/*" />
+          </div>
 
        <div class='mb-3'>
          <label for="comment" class="form-label">Comment</label>
          <textarea class="form-control" name="comment" id="comment"></textarea>
        </div>
 
-       <div class='mb-3 col-4'>
-         <label for="picture" class="form-label">Picture</label>
-         <input type="file" class="form-control" name="picture" id="picture" accept="image/*" />
-       </div>
 
-          <div class="mb-3 col-4">
-            <label for="exampleFormControlSelect1" class="form-label">Contact</label>
+          <div class="mb-3 col-3">
+            <label for="exampleFormControlSelect1" class="form-label">Contact / Person responsible</label>
             <select class="form-select" id="exampleFormControlSelect1"
                     aria-label="Default select" name='contact_id'>
               <option value="">None / Empty</option>
@@ -144,7 +147,7 @@
             </select>
           </div>
 
-       <div class='mb-3 col-4'>
+       <div class='mb-3 col-4 d-none'>
          <label for="status" class="form-label">Status</label>
          <select class="form-select" name="status" id="status" required>
            <option value="completed">Completed</option>
@@ -153,8 +156,8 @@
          </select>
        </div>
 
-          <div class="mb-3 col-8">
-                    <label for="exampleFormControlSelect1" class="form-label">Capital</label>
+          <div class="mb-3 col-3">
+                    <label for="exampleFormControlSelect1" class="form-label">Capital / Taken from</label>
                     <select class="form-select" id="exampleFormControlSelect1"
                             aria-label="Default select" name='parent_id'>
                             <option value=""> None / Empty</option>
@@ -164,7 +167,7 @@
                     </select>
                   </div>
 
-          <div class='mb-3 col-4'>
+          <div class='mb-3 col-3'>
             <label for="category_id" class="form-label">Category</label>
             <select class="form-select" name="category" id="category">
               <option value="">Select Category</option>
@@ -174,7 +177,7 @@
             </select>
           </div>
 
-          <div class='mb-3 col-4'>
+          <div class='mb-3 col-3'>
             <label for="affects_profits" class="form-label">Affects Profits</label>
             <select class="form-select" name="affects_profits" id="affects_profits">
               <option value="1">Yes</option>

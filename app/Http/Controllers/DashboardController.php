@@ -24,12 +24,14 @@ class DashboardController extends Controller
         $date = now()->subDays($i)->format("Y-m-d");
         $daily_expense = Finance::where("type","expense")->whereDate("date",$date)->sum("amount");
         $daily_debt = Finance::where("type","debt")->whereDate("date",$date)->sum("amount");
+        $daily_debt_payment = Finance::where("type","debt-payment")->whereDate("date",$date)->sum("amount");
         $daily_income = Finance::where("type","income")->whereDate("date",$date)->sum("amount");
         $daily_capital = Finance::where("type","capital")->whereDate("date",$date)->sum("amount");
         $daily_data_for_last_30_days[] = [
           "date"=>$date,
           "expense"=>$daily_expense,
           "debt"=>$daily_debt,
+          "debt_payment"=>$daily_debt_payment,
           "income"=>$daily_income,
           "capital"=>$daily_capital
         ];
@@ -66,7 +68,7 @@ class DashboardController extends Controller
 
       $debtors = [];
       $debt_amount_total = Finance::where("type","debt")->sum("amount");
-      $debt_amount_paid_total = Finance::where("type","debt")->where("status","cleared")->sum("amount");
+      $debt_amount_paid_total = Finance::where("type","debt-payment")->sum("amount");
       $debt_amount_balance_total = $debt_amount_total - $debt_amount_paid_total;
 
       $color_words = ["success","danger","warning","info","primary","secondary","dark","light"];
@@ -81,11 +83,16 @@ class DashboardController extends Controller
         $obj->color = $color_words[array_rand($color_words)];
         $obj->contact = Contact::find($id);
         $obj->total_debt = Finance::where("type","debt")->where("contact_id",$id)->sum("amount");
-        $obj->total_paid = Finance::where("type","debt")->where("contact_id",$id)->where("status","cleared")->sum("amount");
+        //$obj->total_paid = Finance::where("type","debt")->where("contact_id",$id)->where("status","cleared")->sum("amount");
+        $obj->total_paid = Finance::where("type","debt-payment")->where("contact_id",$id)->sum("amount");
         $obj->balance = $obj->total_debt - $obj->total_paid;
         $obj->percentage = number_format(($obj->balance/$debt_amount_balance_total)*100,1);
         $debtors[] = $obj;
       }
+      //order debtors by balance desc
+      usort($debtors, function($a, $b) {
+        return $b->balance <=> $a->balance;
+      });
 
 
         return view('dashboard.analytics.index',[
@@ -94,7 +101,7 @@ class DashboardController extends Controller
             ->sum('amount'),
 
           "debt_total" => \App\Models\Finance::where("type","debt")->sum('amount'),
-          "debt_paid_total" => \App\Models\Finance::where("type","debt")->where("status","cleared")->sum('amount'),
+          "debt_paid_total" => \App\Models\Finance::where("type","debt-payment")->sum('amount'),
 
           "chickens_total" => \App\Models\Flock::sum('quantity'),
           "chicken_received_total" => \App\Models\Flock::whereIn("status",["ongoing","sold"])->sum('quantity'),

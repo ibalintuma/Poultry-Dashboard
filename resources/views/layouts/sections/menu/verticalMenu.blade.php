@@ -11,7 +11,7 @@ $configData = Helper::appClasses();
       <span class="app-brand-logo demo">
         @include('_partials.macros')
       </span>
-      <span class="app-brand-text demo menu-text fw-bold ms-2">{{config('variables.templateName')}}</span>
+      <span class="app-brand-text demo menu-text fw-bold ms-2">Poultry UG</span>
     </a>
 
     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">

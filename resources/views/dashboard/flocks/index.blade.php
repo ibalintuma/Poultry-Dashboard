@@ -61,7 +61,8 @@
           <th>type</th>
           <th>Action</th>
           <th>qty Initial</th>
-          <th>qty Lost</th>
+          <th>qty Sold</th>
+          <th>qty Dead</th>
           <th>Avg. Weight</th>
           <th>seller</th>
           <th>status</th>
@@ -112,8 +113,15 @@
           <td>{{$r->quantity}}</td>
           <td>
             <div class="d-flex flex-row justify-content-center align-items-center">
-              <a href="{{url("flock_outs?flock_id=".$r->id)}}">
-              {{$r->quantity_out}}
+              <a href="{{url("flock_outs?type=sold&flock_id=".$r->id)}}">
+              {{$r->quantity_out_sold}}
+              </a>
+            </div>
+          </td>
+          <td>
+            <div class="d-flex flex-row justify-content-center align-items-center">
+              <a href="{{url("flock_outs?type=died&flock_id=".$r->id)}}">
+              {{$r->quantity_out_dead}}
               </a>
             </div>
           </td>
@@ -126,7 +134,7 @@
               Kg
             <a href="{{url("flock_weights/create?flock_id=".$r->id)}}" class="badge bg-danger text-white m-1" >+</a>
           </td>
-          <td>{{$r->seller}}</td>
+          <td class="text-nowrap">{{$r->seller}}</td>
           <td>
             <span class="badge bg-dark text-white">
               {{$r->status}}

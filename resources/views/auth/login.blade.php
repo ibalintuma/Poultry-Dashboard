@@ -35,17 +35,10 @@ $customizerHidden = 'customizer-hide';
       <div class="card">
         <div class="card-body">
           <!-- Logo -->
-          <div class="app-brand justify-content-center">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
-              <span class="app-brand-logo demo">
-                @include('_partials.macros')
-              </span>
-              <span class="app-brand-text demo h3 mb-0 fw-bold">{{config('variables.templateName')}}</span>
-            </a>
-          </div>
+
           <!-- /Logo -->
-          <h4 class="mb-2">Welcome to {{config('variables.templateName')}}! 👋</h4>
-          <p class="mb-4">Please sign-in to your account and start the adventure</p>
+          <h4 class="mb-2">Welcome to Poultry Farm UG 👋</h4>
+          <p class="mb-4">Please sign-in to your account, or create an account to get started</p>
 
           {{-- <form method="POST" class="mb-3" action="{{ route('login') }}">
             @csrf
