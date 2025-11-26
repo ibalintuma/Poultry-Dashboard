@@ -69,10 +69,10 @@
       @foreach($list as $r)
 
         <tr>
-          <td>
+          <td class="text-nowrap">
             {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
           </td>
-          <td>{{$r->flock->name}}</td>
+          <td class="text-nowrap">{{$r->flock->name}}</td>
           <td>{{$r->quantity}}</td>
           <td>
           <span
@@ -89,7 +89,7 @@
             {{$r->type}}
           </span>
           </td>
-          <td>{{$r->reason}}</td>
+          <td class="text-nowrap">{{$r->reason}}</td>
           <td>
             <div class="row w-100">
               @include("dashboard.components.pato_edit",[ "route" => "flock_outs.edit","id" => $r->id])
