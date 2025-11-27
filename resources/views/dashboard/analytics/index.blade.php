@@ -1278,7 +1278,7 @@
 
 
   <!-- Marketing Campaigns -->
-  <div class="col-xl-8 mb-4">
+  <div class="col-xl-7 mb-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="card-title mb-0">Calenders | Task Scheduler | Event</h5>
@@ -1317,36 +1317,58 @@
   </div>
   <!--/ Marketing Campaigns -->
 
-
   <!-- All Users -->
-  <div class="col-md-6 col-lg-6 col-xl-4 mb-4 mb-xl-0">
+  <div class="col-md-6 col-lg-6 col-xl-5 mb-4 mb-xl-0">
     <div class="card h-100">
       <div class="card-header">
         <h5 class="card-title mb-2">Total Debt</h5>
-        <h1 class="display-6 fw-normal mb-0">UGX {{number_format($debt_amount_balance_total)}}</h1>
+        <h1 class="display-6 fw-normal mb-0">UGX {{ number_format($debt_amount_balance_total) }}</h1>
       </div>
       <div class="card-body">
         <span class="d-block mb-2">Current Activity</span>
-        <div class="progress progress-stacked mb-3 mb-xl-5" style="height:8px;">
-          @foreach($debtors as $debtor)
-          <div class="progress-bar bg-{{$debtor->color}}" role="progressbar" style="width: {{$debtor->percentage}}%" aria-valuenow="{{$debtor->percentage}}" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress progress-stacked mb-3 mb-xl-4" style="height:8px;">
+          @foreach ($debtors as $debtor)
+            <div
+              class="progress-bar bg-{{ $debtor->color }}"
+              role="progressbar"
+              style="width: {{ $debtor->percentage }}%"
+              aria-valuenow="{{ $debtor->percentage }}"
+              aria-valuemin="0"
+              aria-valuemax="100">
+            </div>
           @endforeach
         </div>
-        <ul class="p-0 m-0">
-          @foreach($debtors as $debtor)
-            <li class="
-             @if($loop->last) mb-1 @else mb-3 @endif
-             d-flex justify-content-between">
-              <div class="d-flex align-items-center lh-1 me-3">
-                <span class="badge badge-dot bg-{{$debtor->color}} me-2"></span> {{ucfirst($debtor->contact->name)}}
-              </div>
-              <div class="d-flex gap-3">
-                <span>UGX {{number_format($debtor->balance)}}</span>
-                <span class="fw-semibold">{{$debtor->percentage}}%</span>
-              </div>
-            </li>
-          @endforeach
-        </ul>
+
+        <div class="table-responsive rounded">
+          <table class="table table-sm table-hover align-middle mb-0">
+            <thead class="table-light">
+            <tr>
+              <th scope="col">Debtor</th>
+              <th scope="col" class="text-end">Paid (UGX)</th>
+              <th scope="col" class="text-end">Balance (UGX)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($debtors as $debtor)
+              <tr>
+                <td class="text-nowrap">
+                  <div class="d-flex align-items-center">
+                    <span class="badge bg-{{ $debtor->color }} rounded-pill me-2" style="width:10px;height:10px;padding:0;"></span>
+                    <span class="text-{{ $debtor->color }} " ><b>{{ ucfirst($debtor->contact->name) }}</b></span>
+                  </div>
+                </td>
+                <td class="text-end text-nowrap">
+                   {{ number_format($debtor->total_paid) }}
+                </td>
+                <td class="text-end text-nowrap">
+                   {{ number_format($debtor->balance) }}
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+          </table>
+        </div>
+
       </div>
     </div>
   </div>
