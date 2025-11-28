@@ -31,24 +31,30 @@ class SendCalendarReminder extends Command
          ->get(); */
 
 
-        $upcoming_calendars = \App\Models\Calender::whereBetween('date', [now()->toDateString(), now()->addDays(3)->toDateString()])
+        $days = 5;
+        $upcoming_calendars = \App\Models\Calender::whereBetween('date', [now()->toDateString(), now()->addDays($days)->toDateString()])
         //$upcoming_calendars = \App\Models\Calender::whereDate("date", ">=", now()->toDateString())->whereDate('date', '<=', now()->addDays(3)->toDateString())
+          ->orderBy('date', 'asc')
           ->where('status', 'pending')
           ->get();
 
-        $message = "Poultry Events Reminder:\n\n";
-        foreach ($upcoming_calendars as $calendar) {
-          $date = \Carbon\Carbon::parse($calendar->date)->format('F j, Y');
-          $type = $calendar->type;
-          $title = $calendar->title;
-          $amount = $calendar->amount;
-          $message .= "Date: $date\nType: $type\nTitle: $title\nCosting Amount: UGX $amount\n\n";
-        }
+        $message = "Poultry Events (next $days days):\n\n";
+        if( $upcoming_calendars ->isEmpty()) {
+          $message .= "No upcoming events in the next 3 days.\n";
+        } else {
+          foreach ($upcoming_calendars as $calendar) {
+            $date = \Carbon\Carbon::parse($calendar->date)->format('F j, Y');
+            $type = strtoupper($calendar->type);
+            $title = $calendar->title;
+            $amount = $calendar->amount;
+            $message .= "Date: $date\nTitle: $type | $title\nTotal Amount: UGX $amount\n\n";
+          }
 
-        $contacts = \App\Models\Contact::where('enable_sms_notifications', true)->whereNotNull('phone')->get();
-        foreach ($contacts as $contact) {
-          $phone = $this->fixPhoneNumber($contact->phone);
-          $this->sendSMS($phone, $message);
+          $contacts = \App\Models\Contact::where('enable_sms_notifications', true)->whereNotNull('phone')->get();
+          foreach ($contacts as $contact) {
+            $phone = $this->fixPhoneNumber($contact->phone);
+            $this->sendSMS($phone, $message);
+          }
         }
 
     }
