@@ -28,7 +28,7 @@ class FlockController extends Controller
                 $item->quantity_out_dead = \App\Models\FlockOut::where("flock_id",$item->id)->where("type","died")->sum("quantity");
                 $item->quantity_out_sold = \App\Models\FlockOut::where("flock_id",$item->id)->where("type","sold")->sum("quantity");
 
-                $item->quantity_current = $item->quantity - $item->quantity_out;
+                $item->quantity_current = $item->quantity - \App\Models\FlockOut::where("flock_id",$item->id)->sum("quantity");
                 $item->average_weight = \App\Models\FlockWeight::where("flock_id",$item->id)
                   ->whereDate("date",$last_weight_date)
                   ->avg("weight");
