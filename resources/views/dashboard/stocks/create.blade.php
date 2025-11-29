@@ -65,7 +65,7 @@
       <form action='{{url("stocks")}}' method='post' enctype='multipart/form-data'>
 
         @csrf
-
+        {{--`name`, `units`, `comment`, `picture`, `alert_quantity`, `priority_level`, `unit_price`, `supplier_id`--}}
         <div class='mb-3'>
           <label for="defaultFormControlInput" class="form-label">name</label>
           <input type="text" class="form-control"
@@ -100,6 +100,47 @@
           <label for="formFile" class="form-label">Picture</label>
           <input class="form-control" type="file" id="formFile" name='picture'>
         </div>
+
+        <div class='mb-3'>
+          <label for="defaultFormControlInput" class="form-label">quantity</label>
+          <input type="number" class="form-control"
+                 name='quantity'
+                 id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+        </div>
+        <div class='mb-3'>
+          <label for="defaultFormControlInput" class="form-label">alert_quantity</label>
+          <input type="number" class="form-control"
+                 name='alert_quantity'
+                 id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+        </div>
+
+        <div class='mb-3'>
+          <label for="defaultFormControlInput" class="form-label">priority_level</label>
+          <select name='priority_level' class='form-control'>
+            <option value='low'>Low</option>
+            <option value='medium'>Medium</option>
+            <option value='high'>High</option>
+          </select>
+        </div>
+
+        <div class='mb-3'>
+          <label for="defaultFormControlInput" class="form-label">unit_price</label>
+          <input type="number" step="0.01" class="form-control"
+                 name='unit_price'
+                 id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+        </div>
+
+        <div class='mb-3'>
+          <label for="defaultFormControlInput" class="form-label">supplier</label>
+          <select name='supplier_id' class='form-control'>
+            <option value=''>-- None / Empty --</option>
+            @foreach($suppliers as $s)
+              <option value='{{$s->id}}'>{{$s->name}}</option>
+            @endforeach
+          </select>
+        </div>
+
+        <input type="text" value="{{url()->previous()}}" name="previous_url" class="d-none">
 
         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">Submit</button>
         <a href='{{url()->previous()}}' class="btn btn-label-secondary">Cancel</a>

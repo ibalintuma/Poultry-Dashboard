@@ -66,7 +66,7 @@
 
           @csrf
           @method('PUT')
-
+          {{--`name`, `units`, `comment`, `picture`, `alert_quantity`, `priority_level`, `unit_price`, `supplier_id`--}}
 
           <div class='mb-3'>
             <label for="defaultFormControlInput" class="form-label">name</label>
@@ -108,6 +108,52 @@
             <input class="form-control" type="file" id="formFile" name='picture'>
           </div>
 
+          <div class='mb-3'>
+            <label for="defaultFormControlInput" class="form-label">quantity</label>
+            <input type="number" class="form-control"
+                   name='quantity'
+                    value='{{ $obj->quantity }}'
+                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+          </div>
+
+            <div class='mb-3'>
+                <label for="defaultFormControlInput" class="form-label">alert_quantity</label>
+                <input type="number" class="form-control"
+                     name='alert_quantity'
+                     value='{{ $obj->alert_quantity }}'
+                     id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+            </div>
+
+            <div class='mb-3'>
+                <label for="defaultFormControlInput" class="form-label">priority_level</label>
+                <select name='priority_level' class='form-control'>
+                    <option value='low' {{ $obj->priority_level == 'low' ? 'selected' : '' }}>Low</option>
+                    <option value='medium' {{ $obj->priority_level == 'medium' ? 'selected' : '' }}>Medium</option>
+                    <option value='high' {{ $obj->priority_level == 'high' ? 'selected' : '' }}>High</option>
+                </select>
+            </div>
+
+            <div class='mb-3'>
+                <label for="defaultFormControlInput" class="form-label">unit_price</label>
+                <input type="number" step="0.01" class="form-control"
+                     name='unit_price'
+                     value='{{ $obj->unit_price }}'
+                     id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+            </div>
+
+            <div class='mb-3'>
+                <label for="defaultFormControlInput" class="form-label">supplier</label>
+                <select name='supplier_id' class='form-control'>
+                  @foreach($suppliers as $s)
+                    <option value=''>-- None / Empty --</option>
+                    <option value='{{$s->id}}'
+                      @if($obj->supplier_id == $s->id) selected @endif
+                    >{{$s->name}}</option>
+                  @endforeach
+                </select>
+            </div>
+
+            <input type="text" value="{{url()->previous()}}" name="previous_url" class="d-none">
 
 
 

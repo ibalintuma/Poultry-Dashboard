@@ -115,10 +115,12 @@
 
           <div class='mb-3 col-6'>
             <label for="defaultFormControlInput" class="form-label">type</label>
-            <input type="text" class="form-control"
-                   name='type'
-                   value="staff"
-                   id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+            <select class="form-select" name="type" id="type" required>
+              <option value="staff">staff</option>
+              <option value="supplier">supplier</option>
+              <option value="customer">customer</option>
+              <option value="other">other</option>
+            </select>
           </div>
 
         <div class='mb-3 col-6'>

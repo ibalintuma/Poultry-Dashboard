@@ -95,10 +95,11 @@
 
           <div class='mb-3'>
                     <label for="defaultFormControlInput" class="form-label">type</label>
-                    <input type="text" class="form-control"
-                           name='type'
-                           value='{{ $obj->type }}'
-                           id="defaultFormControlInput" aria-describedby="defaultFormControlHelp" />
+                    <select class="form-select" name="type" id="type" required>
+                      <option value="customer" @if($obj->type == "customer") selected @endif >customer</option>
+                      <option value="supplier" @if($obj->type == "supplier") selected @endif >supplier</option>
+                      <option value="staff" @if($obj->type == "staff") selected @endif >staff</option>
+                      <option value="other" @if($obj->type == "other") selected @endif >other</option>
                   </div>
 
           <div class='mb-3'>

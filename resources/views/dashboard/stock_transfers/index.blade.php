@@ -37,6 +37,13 @@
 
 @section('content')
 
+  @if ($message = Session::get('error'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+      {{ $message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  @endif
+
 <!-- stock_transfers List Table -->
 <div class="card">
   <div class="card-header border-bottom">
@@ -49,11 +56,10 @@
 
   </div>
 
-
   <div class="card-datatable table-responsive">
     <table class="datatables-users table border-top">
+      {{--`date`, `stock_id`, `finance_id`, `quantity`, `direction`, `comment`, `created_at`, `updated_at`, `quantity_before`, `quantity_after`--}}
       <thead>
-
         <tr>
           <th>Date</th>
           <th>Stock</th>
@@ -62,21 +68,35 @@
           <th>Direction</th>
           <th>Action</th>
           <th>Comment</th>
+          <th>quantity before</th>
+          <th>quantity after</th>
         </tr>
       </thead>
 
       @foreach($list as $r)
 
-        <tr>
-          <td>{{$r->date}}</td>
-          <td>{{$r->stock->name}}</td>
-          <td>{{$r->quantity}}</td>
+        <tr
+          class="{{ $r->direction == "add" ? 'table-success' : 'table-danger' }}"
+        >
+          <td class="text-nowrap">{{$r->date}}</td>
+          <td class="text-nowrap">{{$r->stock->name}}</td>
+          <td class="text-nowrap">
+            {{$r->quantity}}
+            {{$r->stock->units}}
+          </td>
           <td>
             @isset($r->finance)
             {{$r->finance->amount}}
             @endisset
           </td>
-          <td>{{$r->direction}}</td>
+          <td>
+            @if($r->direction == "add")
+              {{--<span class="badge bg-label-success">Add</span>--}}
+              <i class="bx bx-up-arrow-circle text-success"></i>
+            @else
+              {{--<span class="badge bg-label-danger">Subtract</span>--}}
+              <i class="bx bx-down-arrow-circle text-danger"></i>
+            @endif</td>
 
           <td>
             <div class="row w-100">
@@ -85,6 +105,8 @@
             </div>
           </td>
           <td>{{$r->comment}}</td>
+          <td>{{$r->quantity_before}}</td>
+          <td>{{$r->quantity_after}}</td>
 
         </tr>
 

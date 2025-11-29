@@ -5,41 +5,56 @@
       "name": "Dashboard",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "app-dashboard"
-    },{
-      "url": "flocks",
+    },
+    {
       "name": "Batches",
-      "icon": "menu-icon tf-icons bx bx-group",
-      "slug": "app-flocks"
+      "icon": "menu-icon tf-icons bx bx-layer",
+      "slug": "app-batches",
+      "submenu": [
+        {
+          "url": "flocks",
+          "name": "All Batches",
+          "icon": "menu-icon tf-icons bx bx-group",
+          "slug": "app-flocks"
+        },
+        {
+          "url": "flock_outs",
+          "name": "Batches Out",
+          "icon": "menu-icon tf-icons bx bx-log-out",
+          "slug": "app-flock_outs"
+        },
+        {
+          "url": "flock_weights",
+          "name": "Batch Weights",
+          "icon": "menu-icon tf-icons bx bx-line-chart",
+          "slug": "app-flock_weights"
+        }
+      ]
     },
     {
-      "url": "flock_outs",
-      "name": "Batches Out",
-      "icon": "menu-icon tf-icons bx bx-exit",
-      "slug": "app-flock_outs"
-    },
-    {
-      "url": "flock_weights",
-      "name": "Batch Weights",
-      "icon": "menu-icon tf-icons bx bx-exit",
-      "slug": "app-flock_weights"
-    },
-    {
-      "url": "finances",
-      "name": "Finances",
-      "icon": "menu-icon tf-icons bx bx-wallet",
-      "slug": "app-flock_outs"
-    },
-    {
-      "url": "stocks",
-      "name": "Stock",
-      "icon": "menu-icon tf-icons bx bx-package",
-      "slug": "app-stocks"
-    },
-    {
-      "url": "stock_transfers",
-      "name": "Stock Transfers",
-      "icon": "menu-icon tf-icons bx bx-transfer-alt",
-      "slug": "app-stock_transfers"
+      "name": "Inventory",
+      "icon": "menu-icon tf-icons bx bx-box",
+      "slug": "app-inventory",
+      "submenu": [
+        {
+          "url": "stocks",
+          "name": "Stock Items",
+          "icon": "menu-icon tf-icons bx bx-package",
+          "slug": "app-stocks"
+        },
+        {
+          "url": "stock_transfers",
+          "name": "Stock Transfers",
+          "icon": "menu-icon tf-icons bx bx-transfer-alt",
+          "slug": "app-stock_transfers"
+        },
+        {
+          "url": "stock_quantities",
+          "name": "Stock Quantities",
+          "icon": "menu-icon tf-icons bx bx-calculator",
+          "slug": "app-stock_quantities"
+        }
+      ]
     },
     {
       "url": "treatments",
@@ -48,22 +63,35 @@
       "slug": "app-treatments"
     },
     {
-      "url": "farms",
-      "name": "Farms",
-      "icon": "menu-icon tf-icons bx bx-home-heart",
-      "slug": "app-farms"
-    },
-    {
-      "url": "contacts",
-      "name": "Contacts",
-      "icon": "menu-icon tf-icons bx bx-user-circle",
-      "slug": "app-contacts"
+      "url": "finances",
+      "name": "Finances",
+      "icon": "menu-icon tf-icons bx bx-wallet",
+      "slug": "app-finances"
     },
     {
       "url": "calenders",
-      "name": "Calender",
+      "name": "Calendar",
       "icon": "menu-icon tf-icons bx bx-calendar",
       "slug": "app-calenders"
+    },
+    {
+      "name": "Settings",
+      "icon": "menu-icon tf-icons bx bx-cog",
+      "slug": "app-settings",
+      "submenu": [
+        {
+          "url": "farms",
+          "name": "Farms",
+          "icon": "menu-icon tf-icons bx bx-home-heart",
+          "slug": "app-farms"
+        },
+        {
+          "url": "contacts",
+          "name": "Contacts",
+          "icon": "menu-icon tf-icons bx bx-user-circle",
+          "slug": "app-contacts"
+        }
+      ]
     }
   ]
 }
