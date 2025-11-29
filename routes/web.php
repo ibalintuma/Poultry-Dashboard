@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalenderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\laravel_example\UserManagement;
 
@@ -205,3 +206,4 @@ Route::resource("stock_quantities", App\Http\Controllers\StockQuantityController
 Route::resource("treatments", App\Http\Controllers\TreatmentController::class);
 Route::resource("contacts", App\Http\Controllers\ContactController::class);
 Route::resource("calenders", App\Http\Controllers\CalenderController::class);
+Route::get('calenders/{calender}/complete', [CalenderController::class, 'complete'])->name('calenders.complete');

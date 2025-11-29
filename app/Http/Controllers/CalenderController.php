@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class CalenderController extends Controller
 {
+
+  /**
+   * Mark a task as completed.
+   */
+  public function complete(Calender $calender)
+  {
+    $calender->status = 'Completed';
+    $calender->save();
+
+    return redirect()->back()->with('success', 'Task marked as completed! ');
+  }
+
     /**
      * Display a listing of the resource.
      */

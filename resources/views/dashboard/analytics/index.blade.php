@@ -1277,41 +1277,146 @@
   </div>
 
 
+
+  @php
+    $today = now()->toDateString();
+  @endphp
   <!-- Marketing Campaigns -->
   <div class="col-xl-7 mb-4">
     <div class="card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <h5 class="card-title mb-0">Calenders | Task Scheduler | Event</h5>
+        <a href='{{url("calenders/create")}}' class='btn btn-primary btn-sm'>
+          <i class="bx bx-plus me-1"></i> Add New Task
+        </a>
       </div>
-      <div class="table-responsive">
-        <table class="table border-top">
-          <thead>
-          <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Amount Needed</th>
-            <th>status</th>
-          </tr>
-          </thead>
-          <tbody class="table-border-bottom-0">
-            @foreach($calenders as $calender)
-              <tr>
-                <td class="text-nowrap">
-                  {{ \Carbon\Carbon::parse($calender->date)->format('M d, Y') }}
-                </td>
-                <td class="text-nowrap"> <b>{{strtoupper($calender->type)}}</b> | {{$calender->title}}</td>
-                <td class="">
-                  <div style="width: 200px" >
-                    {{$calender->description}}
+      <div class="card-body p-0">
+        <!-- Simple task list -->
+        <div class="task-list">
+          @forelse($calenders->sortBy('date') as $r)
+            @php
+              $isOverdue = $r->date < $today && $r->status != 'Completed';
+              $isToday = $r->date == $today;
+              $isUpcoming = $r->date > $today;
+              $isCompleted = $r->status == 'Completed';
+
+              $dateObj = \Carbon\Carbon::parse($r->date);
+              $daysUntil = now()->startOfDay()->diffInDays($dateObj, false);
+
+              if ($isCompleted) {
+                $borderClass = 'border-start border-success border-4';
+                $filterClass = 'completed';
+              } elseif ($isOverdue) {
+                $borderClass = 'border-start border-danger border-4';
+                $filterClass = 'overdue';
+              } elseif ($isToday) {
+                $borderClass = 'border-start border-primary border-4';
+                $filterClass = 'today';
+              } else {
+                $borderClass = 'border-start border-warning border-4';
+                $filterClass = 'upcoming';
+              }
+            @endphp
+
+            <div class="task-item p-3 border-bottom {{ $isCompleted ? 'bg-light' : '' }}"
+                 data-filter-type="{{ $filterClass }}">
+              <div class="d-flex align-items-start justify-content-between gap-3">
+
+
+
+                <!-- Date -->
+                <div class="text-center" style="min-width: 60px;">
+                  <div class=" {{ $isOverdue ? 'bg-danger' : ($isToday ? 'bg-primary' : ($isCompleted ? 'bg-success' : 'bg-warning')) }} text-white rounded">
+                  <span class="avatar-initial rounded">
+                    {{ $dateObj->format('d') }}
+                  </span>
                   </div>
-                </td>
-                <td class="text-nowrap"><span>UGX {{number_format($calender->amount)}}</span></td>
-                <td class="text-nowrap"><span class="badge bg-label-dark">{{$calender->status}}</span></td>
-              </tr>
-            @endforeach
-          </tbody>
-        </table>
+                  <small class="text-black d-block mt-1">{{ $dateObj->format('M') }}</small>
+                </div>
+
+
+                <!-- Main info -->
+                <div class="flex-grow-1">
+                  <div class="d-flex justify-content-between align-items-start gap-2">
+                    <div>
+                      <h6 class="mb-1 {{ $isCompleted ?  ' text-muted' : '' }}">
+                        {{ $r->title ?: 'No title' }}
+                      </h6>
+
+                      @if($r->description)
+                        <p class="text-muted mb-1 small {{ $isCompleted ? '' : '' }}">
+                          {{ Str::limit($r->description, 80) }}
+                        </p>
+                      @endif
+
+                      <div class="d-flex flex-wrap gap-2 small">
+
+                        <span class="text-muted">
+                          <i class="bx bx-stats me-1"></i>{{ strtoupper($r->status) }}
+                        </span>
+
+                        {{-- When --}}
+                        <span class="{{ $isOverdue ? 'text-danger' : ($isToday ? 'text-primary' : 'text-muted') }}">
+                        <i class="bx bx-time-five me-1"></i>
+                        @if($isOverdue)
+                            Late ({{ abs($daysUntil) }} day(s) ago)
+                          @elseif($isToday)
+                            Today
+                          @elseif($daysUntil == 1)
+                            Tomorrow
+                          @elseif($daysUntil > 1)
+                            In {{ $daysUntil }} days
+                          @else
+                            {{ $dateObj->format('d M Y') }}
+                          @endif
+                      </span>
+
+                        {{-- Who --}}
+                        @isset($r->contact)
+                          <span class="text-muted">
+                          <i class="bx bx-user me-1"></i>{{ $r->contact->name }}
+                        </span>
+                        @endisset
+
+                        {{-- Money --}}
+                        @if($r->amount > 0)
+                          <span class="text-success">
+                          <i class="bx bx-wallet me-1"></i>UGX {{ number_format($r->amount) }}
+                        </span>
+                        @endif
+                      </div>
+                    </div>
+
+
+                    <!-- Status + actions -->
+                    <div class="text-end">
+                      {{-- Simple status text --}}
+
+
+
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+          @empty
+            <div class="text-center py-5">
+              <div class="avatar avatar-lg mb-3">
+              <span class="avatar-initial rounded-circle bg-label-secondary">
+                <i class="bx bx-calendar-x fs-3"></i>
+              </span>
+              </div>
+              <h6 class="mb-1">No tasks yet</h6>
+              <p class="text-muted mb-3">You have not added any work or reminder.</p>
+              <a href='{{url("calenders/create")}}' class='btn btn-primary'>
+                <i class="bx bx-plus me-1"></i> Add a task
+              </a>
+            </div>
+          @endforelse
+        </div>
       </div>
     </div>
   </div>

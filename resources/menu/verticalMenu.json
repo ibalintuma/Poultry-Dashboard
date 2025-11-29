@@ -70,7 +70,7 @@
     },
     {
       "url": "calenders",
-      "name": "Calendar",
+      "name": "Calendar / Tasks",
       "icon": "menu-icon tf-icons bx bx-calendar",
       "slug": "app-calenders"
     },
