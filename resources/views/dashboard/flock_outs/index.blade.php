@@ -59,6 +59,7 @@
           <th>date</th>
           <th>flock</th>
           <th>quantity</th>
+          <th>age</th>
           <th>type</th>
           <th>reason</th>
           <th>Action</th>
@@ -72,8 +73,18 @@
           <td class="text-nowrap">
             {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
           </td>
-          <td class="text-nowrap">{{$r->flock->name}}</td>
+          <td class="text-nowrap">
+            <b>{{$r->flock->name}}</b>
+          </td>
           <td>{{$r->quantity}}</td>
+          <td class="text-nowrap">
+            <b>{{ \Carbon\Carbon::parse($r->flock->date)->diffInDays(\Carbon\Carbon::parse($r->date)) }} days</b>
+            <span class="text-muted small">(
+            {{ \Carbon\Carbon::parse($r->flock->date)->format(\Carbon\Carbon::parse($r->flock->date)->year == now()->year ? 'M j' : 'M j, Y') }}
+            -
+            {{ \Carbon\Carbon::parse($r->date)->format(\Carbon\Carbon::parse($r->date)->year == now()->year ? 'M j' : 'M j, Y') }}
+            )</span>
+          </td>
           <td>
           <span
             class="
